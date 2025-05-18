@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-family: "Roboto", sans-serif;
+  background-color: #f9f7f7;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+picture img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+  margin: 5px;
+}
+
+@font-face {
+  font-family: "icomoon";
+  src: url("../fonts/icomoon.eot?99klhs");
+  src: url("../fonts/icomoon.eot?99klhs#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?99klhs") format("truetype"), url("../fonts/icomoon.woff?99klhs") format("woff"), url("../fonts/icomoon.svg?99klhs#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^=icon-]::before,
+[class*=" icon-"]::before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow:before {
+  content: "\e903";
+}
+
+.icon-plus:before {
+  content: "\e901";
+}
+
+.icon-check:before {
+  content: "\e902";
+}
+
+.icon-exit:before {
+  content: "\e900";
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+[class*=__container] {
+  max-width: 95vw;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+@media (max-width: 767.98px) {
+  /*MOBILE*/
+  [class*=__container] {
+    max-width: none;
+  }
+}
+.body__backblur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+  opacity: 1;
+  pointer-events: all;
+}
+
+button,
+.button {
+  opacity: 0.8;
+  transition: 0.3s;
+}
+button:hover,
+.button:hover {
+  opacity: 1;
+}
+
+picture {
+  position: relative;
+}
+
+.scrollbar_hidden::-webkit-scrollbar {
+  width: 0px;
+}
+
+.copyAllert.active {
+  opacity: 1 !important;
+}
