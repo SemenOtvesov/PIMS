@@ -1,21 +1,34 @@
 import React, { memo } from 'react';
 import style from './style';
 
-// @ts-ignore: Unreachable code error
-import IconTasks from '@maket/img/icon/tasks.png';
-// @ts-ignore: Unreachable code error
-import IconFarm from '@maket/img/icon/farm.png';
-// @ts-ignore: Unreachable code error
-import IconPari from '@maket/img/icon/pari.png';
-import { useLocation, useNavigate } from 'react-router-dom';
 import useAppSelector from '@js/hooks/useAppSelector';
 
 export default memo(
     () => {
-        const { Container } = style();
-        const navigate = useNavigate();
-        const location = useLocation();
-        return <Container></Container>;
+        const { Container, Item, IconBox, Icon, ItemText } = style();
+        const section = useAppSelector(state => state.activeSectionState.section);
+        return (
+            <Container>
+                <Item>
+                    <IconBox>
+                        <Icon></Icon>
+                    </IconBox>
+                    <ItemText>Новости</ItemText>
+                </Item>
+                <Item>
+                    <IconBox>
+                        <Icon></Icon>
+                    </IconBox>
+                    <ItemText>Рейтинг</ItemText>
+                </Item>
+                <Item>
+                    <IconBox>
+                        <Icon></Icon>
+                    </IconBox>
+                    <ItemText>Профиль</ItemText>
+                </Item>
+            </Container>
+        );
     },
     () => true,
 );

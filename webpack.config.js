@@ -60,6 +60,7 @@ module.exports = {
             '@localTypes': path.resolve(__dirname, 'maket/js/types'),
             '@state': path.resolve(__dirname, 'maket/js/state'),
             '@constants': path.resolve(__dirname, 'maket/js/constants'),
+            '@hooks': path.resolve(__dirname, 'maket/js/hooks'),
 
             '@components': path.resolve(__dirname, 'maket/js/components'),
             '@mainComponents': path.resolve(__dirname, 'maket/js/components/mainComponents'),

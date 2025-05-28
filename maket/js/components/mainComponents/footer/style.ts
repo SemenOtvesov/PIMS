@@ -5,23 +5,25 @@ export default () => {
     const size = useWindowSizeCheck();
     return {
         Container: styled.div({
-            position: 'sticky',
-            bottom: '1vh',
+            position: 'absolute',
+            bottom: '0vh',
             left: '0',
-            margin: '0 5vw',
             height: '5em',
             maxHeight: '5em',
-            width: '90vw',
+            width: '100vw',
             minHeight: '5em',
 
             display: 'flex',
             justifyContent: 'space-between',
 
-            padding: '1em 2em',
-            borderRadius: 20,
-            backgroundColor: '',
+            backgroundColor: '#FFF1D2',
+            padding: '0.5rem 2rem',
             '-webkit-tap-highlight-color': 'transparent',
         }),
+        Item: styled.div({}),
+        IconBox: styled.div({}),
+        Icon: styled.div({}),
+        ItemText: styled.div({}),
         size,
     };
 };

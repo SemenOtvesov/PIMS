@@ -5,26 +5,36 @@ import Footer from './footer';
 import { TlayoutContext } from '@js/types/context/layout';
 import Allert from './fn/allert';
 import Resize from './fn/resize';
-import useAppDispatch from '@js/hooks/useAppDispatch';
 import BackBtn from './fn/backBtn';
+import useAdminToken from '@js/hooks/admin/useAdminToken';
+import useAdminAllQuery from '@js/hooks/admin/useAdminAllQuery';
 
 export const LayoutContext = createContext<TlayoutContext>({});
 
 export default () => {
-    const location = useLocation();
-    const dispatch = useAppDispatch();
+    const { pathname } = useLocation();
 
-    const checkAdmin = location.pathname.includes('admin');
+    useAdminToken();
+    useAdminAllQuery();
+
+    useEffect(() => {
+        if (pathname.includes('admin')) {
+            document.body.setAttribute('style', 'background: #fff');
+        } else {
+            document.body.setAttribute('style', '');
+        }
+    });
+
     return (
         <LayoutContext.Provider value={'val'}>
-            {!checkAdmin && <Header />}
-            {!checkAdmin && <Allert />}
+            {/* <Header /> */}
+
+            <Allert />
             <BackBtn />
             <Resize />
-            <div style={location.pathname.includes('admin') ? {} : { pointerEvents: 'none' }}>
-                <Outlet />
-            </div>
-            {!checkAdmin && <Footer />}
+
+            <Outlet />
+            {pathname.includes('admin') ? '' : <Footer />}
         </LayoutContext.Provider>
     );
 };

@@ -5,15 +5,21 @@ import style from './style';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 import useAppSelector from '@js/hooks/useAppSelector';
 import CopyButton from './copyButton';
+import News from './news';
+import Profile from './profile';
+import Raiting from './raiting';
 
 export default () => {
     const { Container } = style();
-    const dispatch = useAppDispatch();
-    const token = useAppSelector(state => state.userState.token);
+    const section = useAppSelector(state => state.activeSectionState.section);
 
-    return (
-        <Container className="scrollbar_hidden">
-            <CopyButton />
-        </Container>
-    );
+    if (section == 'news') {
+        return <News />;
+    }
+    if (section == 'profile') {
+        return <Profile />;
+    }
+    if (section == 'raiting') {
+        return <Raiting />;
+    }
 };

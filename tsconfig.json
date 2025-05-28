@@ -22,6 +22,7 @@
             "@localTypes/*": ["maket/js/types/*"],
             "@state/*": ["maket/js/state/*"],
             "@constants/*": ["maket/js/constants/*"],
+            "@hooks/*": ["maket/js/hooks/*"],
 
             "@components/*": ["maket/js/components/*"],
             "@mainComponents/*": ["maket/js/components/mainComponents/*"],

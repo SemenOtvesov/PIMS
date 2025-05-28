@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './layout';
 import MainRoute from '../routes/mainRoute';
+import Admin from '../routes/admin';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 import tgAuth from '@js/api/tgAuth';
 
@@ -25,6 +26,7 @@ export default () => {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<MainRoute />} />
+                <Route path="admin" element={<Admin />} />
             </Route>
         </Routes>
     );

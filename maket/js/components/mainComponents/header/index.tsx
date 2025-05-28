@@ -38,7 +38,7 @@ const header = () => {
                 <BalanceValue>
                     {user ? user.coins : ''}
                     <BalanceIconBox>
-                        <BalanceIcon alt="" src={IconCoin}></BalanceIcon>
+                        {/* <BalanceIcon alt="" src={IconCoin}></BalanceIcon> */}
                     </BalanceIconBox>
                 </BalanceValue>
             </BalanceBox>
