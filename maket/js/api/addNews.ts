@@ -20,6 +20,8 @@ export default async (
         {
             headers: {
                 Authorization: `Bearer ${adminToken}`,
+                'Content-Type': 'multipart/form-data',
+                Accept: 'application/json',
             },
         },
     );
