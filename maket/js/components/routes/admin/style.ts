@@ -18,6 +18,13 @@ export default () => {
             width: '100%',
             height: '100vh',
         }),
+        FormLoginBox: styled.div({
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100vh',
+        }),
         size,
     };
 };

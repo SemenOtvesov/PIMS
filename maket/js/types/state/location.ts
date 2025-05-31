@@ -40,3 +40,8 @@ export type Tlocation = {
     };
     empty: boolean;
 };
+
+export type Taward = {
+    name: string;
+    address: string;
+};
