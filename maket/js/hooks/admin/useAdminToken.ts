@@ -6,6 +6,9 @@ export default () => {
     let token = document.cookie.split(';').filter(el => el.includes('adminToken'))[0];
     if (token) {
         token = token.split('adminToken=')[1];
+        if (token == '' || token == 'undefined') {
+            return;
+        }
         dispatch(setAdminToken(token));
     }
 };

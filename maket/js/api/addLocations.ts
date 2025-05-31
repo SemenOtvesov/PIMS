@@ -8,25 +8,31 @@ export default async (
     dispatch: TappDispatch,
     adminToken: string,
     name: string,
-    description: string,
-    image: File,
+    address: string,
+    image: [File],
 ) => {
-    var formData = new FormData();
-    formData.append('file', image);
-    const res = await axios.post<{ token: string }>(
-        baseUrl + '/api/admin/create-location',
-        {
-            dto: { name, description },
-            image: formData,
-        },
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Accept: 'application/json',
-                Authorization: `Bearer ${adminToken}`,
+    const reader = new FileReader();
+
+    reader.onload = async function (e) {
+        const base64String = e.target.result;
+        const res = await axios.post<{ token: string }>(
+            baseUrl + '/api/admin/create-location',
+            {
+                location: { name, address },
+                file: base64String,
             },
-        },
-    );
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${adminToken}`,
+                },
+            },
+        );
+    };
+
+    reader.readAsDataURL(image[0]);
+
     // dispatch(setAdminToken(res.data.token));
-    return res.data;
+    // return res.data;
 };

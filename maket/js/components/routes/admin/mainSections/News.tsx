@@ -59,6 +59,7 @@ type Inputs = {
     name: string;
     description: string;
     creator: string;
+    photo: [File];
 };
 function CreateForm() {
     const adminToken = useAppSelector(state => state.adminState.token);
@@ -69,7 +70,7 @@ function CreateForm() {
     const { handleSubmit, register, control } = form;
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        addNews(dispatch, adminToken, data.name, data.description, data.creator);
+        addNews(dispatch, adminToken, data.name, data.description, data.creator, data.photo);
     };
 
     return (
@@ -105,6 +106,21 @@ function CreateForm() {
                     size="small"
                     {...register('creator', { required: true })}
                 />
+                <Button
+                    style={{ width: '40vw' }}
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                >
+                    Добавить фото
+                    <VisuallyHiddenInput
+                        type="file"
+                        {...register('photo', { required: true })}
+                        multiple
+                    />
+                </Button>
 
                 <IsoleteBtn control={control} />
             </FromWrapper>

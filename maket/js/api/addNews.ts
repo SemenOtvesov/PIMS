@@ -9,22 +9,30 @@ export default async (
     title: string,
     description: string,
     creator: string,
+    image: [File],
 ) => {
-    const res = await axios.post<{}>(
-        baseUrl + '/api/admin/add-news',
-        {
-            title,
-            description,
-            creator,
-        },
-        {
-            headers: {
-                Authorization: `Bearer ${adminToken}`,
-                'Content-Type': 'multipart/form-data',
-                Accept: 'application/json',
-            },
-        },
-    );
     // dispatch(setAdminToken(res.data.token));
-    return res.data;
+    // return res.data;
+
+    const reader = new FileReader();
+
+    reader.onload = async function (e) {
+        const base64String = e.target.result;
+        const res = await axios.post<{}>(
+            baseUrl + '/api/admin/add-news',
+            {
+                dto: { title, description, creator },
+                file: base64String,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${adminToken}`,
+                    'Content-Type': 'multipart/form-data',
+                    Accept: 'application/json',
+                },
+            },
+        );
+    };
+
+    reader.readAsDataURL(image[0]);
 };

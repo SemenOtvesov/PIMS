@@ -16,6 +16,8 @@ import { TactiveSection } from '@js/types/state/activeSection';
 import Main from './main';
 import useAppSelector from '@js/hooks/useAppSelector';
 
+import LogoutBtn from './logoutBtn';
+
 import FormAuth from './formAuth';
 
 const drawerWidth = 240;
@@ -41,10 +43,11 @@ export default function ClippedDrawer() {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
-                <Toolbar>
+                <Toolbar style={{ justifyContent: 'space-between' }}>
                     <Typography variant="h6" noWrap component="div">
                         Админ панель
                     </Typography>
+                    <LogoutBtn />
                 </Toolbar>
             </AppBar>
             <Drawer
