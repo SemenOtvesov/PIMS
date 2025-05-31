@@ -11,6 +11,10 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import useAppSelector from '@js/hooks/useAppSelector';
+import useAppDispatch from '@js/hooks/useAppDispatch';
+import { Control, SubmitHandler, useForm, useFormState } from 'react-hook-form';
+import addAward from '@js/api/addAward';
 
 type Tprops = {};
 
@@ -49,14 +53,30 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
+type Inputs = {
+    name: string;
+    description: string;
+    photo: File;
+};
 function CreateForm() {
-    const { FromWrapper } = style();
+    const adminToken = useAppSelector(state => state.adminState.token);
+    const dispatch = useAppDispatch();
+    const { FromWrapper, FormLoginBox } = style();
+
+    const form = useForm<Inputs>();
+    const { handleSubmit, register, control } = form;
+
+    const onSubmit: SubmitHandler<Inputs> = data => {
+        addAward(dispatch, adminToken, data.name, data.description, data.photo);
+    };
+
     return (
         <Box
             component="form"
             sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
             noValidate
             autoComplete="off"
+            onSubmit={handleSubmit(onSubmit)}
         >
             <FromWrapper>
                 <TextField
@@ -65,6 +85,7 @@ function CreateForm() {
                     id="outlined-size-small"
                     defaultValue="Название"
                     size="small"
+                    {...register('name', { required: true })}
                 />
                 <TextField
                     style={{ width: '40vw', margin: '0' }}
@@ -72,6 +93,7 @@ function CreateForm() {
                     id="outlined-size-small"
                     defaultValue="Описание"
                     size="small"
+                    {...register('description', { required: true })}
                 />
                 <Button
                     style={{ width: '40vw' }}
@@ -84,16 +106,28 @@ function CreateForm() {
                     Добавить фото
                     <VisuallyHiddenInput
                         type="file"
-                        onChange={event => console.log(event.target.files)}
+                        {...register('photo', { required: true })}
                         multiple
                     />
                 </Button>
-                <Stack direction="row" spacing={2}>
-                    <Button style={{ width: '40vw' }} variant="contained" disabled>
-                        Создать
-                    </Button>
-                </Stack>
+                <IsoleteBtn control={control} />
             </FromWrapper>
         </Box>
+    );
+}
+
+function IsoleteBtn({ control }: { control: Control<Inputs, any, Inputs> }) {
+    const formState = useFormState({ control: control });
+    return (
+        <Stack direction="row" spacing={2}>
+            <Button
+                type="submit"
+                style={{ width: '40vw' }}
+                variant="contained"
+                disabled={!formState.isValid}
+            >
+                Создать
+            </Button>
+        </Stack>
     );
 }

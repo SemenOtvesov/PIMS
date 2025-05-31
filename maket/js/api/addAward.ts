@@ -14,7 +14,7 @@ export default async (
     var formData = new FormData();
     formData.append('file', image);
     const res = await axios.post<{ token: string }>(
-        baseUrl + '/api/admin/create-location',
+        baseUrl + '/api/admin/create-award',
         {
             dto: { name, description },
             image: formData,
