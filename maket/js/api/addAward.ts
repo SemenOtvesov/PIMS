@@ -14,19 +14,18 @@ export default async (
     // dispatch(setAdminToken(res.data.token));
     // return res.data;
     const formData = new FormData();
-    formData.append('image', image[0]);
+    formData.append('image', image[0]); // Файл
 
-    const res = await axios.post<{ token: string }>(
-        baseUrl + '/api/admin/create-award',
-        {
-            dto: { name, description },
-            file: formData,
+    // Создаем отдельную часть для JSON
+    const awardJsonBlob = new Blob([JSON.stringify({ name, description })], {
+        type: 'application/json',
+    });
+    formData.append('dto', awardJsonBlob);
+
+    const res = await axios.post<{ token: string }>(baseUrl + '/api/admin/create-award', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${adminToken}`,
         },
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${adminToken}`,
-            },
-        },
-    );
+    });
 };

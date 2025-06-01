@@ -12,14 +12,17 @@ export default async (
     image: [File],
 ) => {
     const formData = new FormData();
-    formData.append('image', image[0]);
+    formData.append('image', image[0]); // Файл
+
+    // Создаем отдельную часть для JSON
+    const locationJsonBlob = new Blob([JSON.stringify({ name, address })], {
+        type: 'application/json',
+    });
+    formData.append('location', locationJsonBlob);
 
     const res = await axios.post<{ token: string }>(
         baseUrl + '/api/admin/create-location',
-        {
-            location: { name, address },
-            file: formData,
-        },
+        formData,
         {
             headers: {
                 'Content-Type': 'multipart/form-data',

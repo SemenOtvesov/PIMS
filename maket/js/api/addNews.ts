@@ -15,20 +15,19 @@ export default async (
     // return res.data;
 
     const formData = new FormData();
-    formData.append('image', image[0]);
+    formData.append('image', image[0]); // Файл
 
-    const res = await axios.post<{}>(
-        baseUrl + '/api/admin/add-news',
-        {
-            dto: { title, description, creator },
-            file: formData,
+    // Создаем отдельную часть для JSON
+    const jsonBlob = new Blob([JSON.stringify({ title, description, creator })], {
+        type: 'application/json',
+    });
+    formData.append('dto', jsonBlob);
+
+    const res = await axios.post(baseUrl + '/api/admin/add-news', formData, {
+        headers: {
+            Authorization: `Bearer ${adminToken}`,
+            'Content-Type': 'multipart/form-data',
+            Accept: 'application/json',
         },
-        {
-            headers: {
-                Authorization: `Bearer ${adminToken}`,
-                'Content-Type': 'multipart/form-data',
-                Accept: 'application/json',
-            },
-        },
-    );
+    });
 };
