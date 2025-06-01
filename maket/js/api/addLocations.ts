@@ -11,27 +11,23 @@ export default async (
     address: string,
     image: [File],
 ) => {
-    const reader = new FileReader();
+    const formData = new FormData();
+    formData.append('image', image[0]);
 
-    reader.onload = async function (e) {
-        const base64String = e.target.result;
-        const res = await axios.post<{ token: string }>(
-            baseUrl + '/api/admin/create-location',
-            {
-                location: { name, address },
-                file: base64String,
+    const res = await axios.post<{ token: string }>(
+        baseUrl + '/api/admin/create-location',
+        {
+            location: { name, address },
+            file: formData,
+        },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Accept: 'application/json',
+                Authorization: `Bearer ${adminToken}`,
             },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${adminToken}`,
-                },
-            },
-        );
-    };
-
-    reader.readAsDataURL(image[0]);
+        },
+    );
 
     // dispatch(setAdminToken(res.data.token));
     // return res.data;

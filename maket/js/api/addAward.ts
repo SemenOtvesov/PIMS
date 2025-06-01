@@ -13,26 +13,20 @@ export default async (
 ) => {
     // dispatch(setAdminToken(res.data.token));
     // return res.data;
+    const formData = new FormData();
+    formData.append('image', image[0]);
 
-    const reader = new FileReader();
-
-    reader.onload = async function (e) {
-        const base64String = e.target.result;
-        const res = await axios.post<{ token: string }>(
-            baseUrl + '/api/admin/create-award',
-            {
-                dto: { name, description },
-                file: base64String,
+    const res = await axios.post<{ token: string }>(
+        baseUrl + '/api/admin/create-award',
+        {
+            dto: { name, description },
+            file: formData,
+        },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${adminToken}`,
             },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${adminToken}`,
-                },
-            },
-        );
-    };
-
-    reader.readAsDataURL(image[0]);
+        },
+    );
 };

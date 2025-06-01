@@ -14,25 +14,21 @@ export default async (
     // dispatch(setAdminToken(res.data.token));
     // return res.data;
 
-    const reader = new FileReader();
+    const formData = new FormData();
+    formData.append('image', image[0]);
 
-    reader.onload = async function (e) {
-        const base64String = e.target.result;
-        const res = await axios.post<{}>(
-            baseUrl + '/api/admin/add-news',
-            {
-                dto: { title, description, creator },
-                file: base64String,
+    const res = await axios.post<{}>(
+        baseUrl + '/api/admin/add-news',
+        {
+            dto: { title, description, creator },
+            file: formData,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${adminToken}`,
+                'Content-Type': 'multipart/form-data',
+                Accept: 'application/json',
             },
-            {
-                headers: {
-                    Authorization: `Bearer ${adminToken}`,
-                    'Content-Type': 'multipart/form-data',
-                    Accept: 'application/json',
-                },
-            },
-        );
-    };
-
-    reader.readAsDataURL(image[0]);
+        },
+    );
 };
