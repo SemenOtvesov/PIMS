@@ -2,7 +2,6 @@ import React from 'react';
 import style from './style';
 import { Divider, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { Tlocation } from '@js/types/state/location';
 import Card from '@js/components/middleComponents/card';
 
 import Box from '@mui/material/Box';
@@ -14,26 +13,36 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import useAppSelector from '@js/hooks/useAppSelector';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 import { Control, SubmitHandler, useForm, useFormState } from 'react-hook-form';
-import addAward from '@js/api/addAward';
+import addAward from '@js/api/admin/addAward';
+import { adminApi } from '@js/api/admin/indexQuery';
 
 type Tprops = {};
 
 export default ({}: Tprops) => {
     const { Container, Item, ItemTitle, CardList } = style();
 
-    const locations: Array<Tlocation> = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    const adminToken = useAppSelector(state => state.adminState.token);
+    const { data, refetch } = adminApi.useGetAwardsQuery(adminToken) || [];
     return (
         <Container>
             <Divider style={{ marginBottom: '-3em' }} />
             <Item>
                 <Typography variant="h5">Создать новую награду</Typography>
-                <CreateForm />
+                <CreateForm refetch={refetch} />
             </Item>
             <Item>
                 <Typography variant="h5">Уже существующие награды</Typography>
                 <CardList>
-                    {locations.map(el => (
-                        <Card />
+                    {data?.content.length == 0 && <>Пока что пусто</>}
+                    {data?.content.map(el => (
+                        <Card
+                            key={el.id}
+                            content={{
+                                title: el.name,
+                                text: el.description,
+                                image: 'data:image/jpeg;base64,' + el.awardImage,
+                            }}
+                        />
                     ))}
                 </CardList>
             </Item>
@@ -56,9 +65,9 @@ const VisuallyHiddenInput = styled('input')({
 type Inputs = {
     name: string;
     description: string;
-    photo: File;
+    photo: [File];
 };
-function CreateForm() {
+function CreateForm({ refetch }: { refetch: any }) {
     const adminToken = useAppSelector(state => state.adminState.token);
     const dispatch = useAppDispatch();
     const { FromWrapper, FormLoginBox } = style();
@@ -67,7 +76,7 @@ function CreateForm() {
     const { handleSubmit, register, control } = form;
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        addAward(dispatch, adminToken, data.name, data.description, data.photo);
+        addAward(dispatch, adminToken, data.name, data.description, data.photo, refetch);
     };
 
     return (
@@ -83,7 +92,6 @@ function CreateForm() {
                     style={{ width: '40vw', margin: '0' }}
                     label="Название"
                     id="outlined-size-small"
-                    defaultValue="Название"
                     size="small"
                     {...register('name', { required: true })}
                 />
@@ -91,7 +99,6 @@ function CreateForm() {
                     style={{ width: '40vw', margin: '0' }}
                     label="Описание"
                     id="outlined-size-small"
-                    defaultValue="Описание"
                     size="small"
                     {...register('description', { required: true })}
                 />

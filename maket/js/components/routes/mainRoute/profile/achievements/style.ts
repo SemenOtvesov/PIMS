@@ -1,0 +1,36 @@
+import useWindowSizeCheck from '@hooks/useWindowSizeCheck';
+import styled from '@emotion/styled';
+
+export default () => {
+    const size = useWindowSizeCheck();
+    return {
+        Container: styled.div({
+            marginTop: '2em',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2em',
+            zIndex: '1',
+            width: '100%',
+        }),
+        Title: styled.div({ fontSize: '1.5em', fontWeight: 600, textAlign: 'center' }),
+        Main: styled.div({ display: 'flex', gap: '1em', flexWrap: 'wrap' }),
+        Achievement: styled.div({
+            width: 'calc((100% - 2em) / 3)',
+            aspectRatio: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            padding: '1em',
+
+            borderRadius: 10,
+
+            backgroundColor: '#EBEBEB',
+        }),
+        AchievementTitle: styled.div({
+            fontSize: '1.2em',
+            fontWeight: 700,
+        }),
+        AchievementText: styled.div({ fontWeight: 600, fontSize: '0.875em' }),
+        size,
+    };
+};

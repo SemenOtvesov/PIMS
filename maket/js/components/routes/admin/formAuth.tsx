@@ -3,7 +3,7 @@ import React from 'react';
 import style from './style';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { Control, SubmitHandler, useForm, UseFormReturn, useFormState } from 'react-hook-form';
-import adminAuth from '@js/api/adminAuth';
+import adminAuth from '@js/api/admin/adminAuth';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 
 type Inputs = {

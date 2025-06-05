@@ -1,7 +1,10 @@
-import { Tuser } from '@js/types/state/user';
+import { TNews } from '@js/types/state/news';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState: { section: 'news' | 'raiting' | 'profile' } = { section: 'news' };
+const initialState: { section: 'news' | 'raiting' | 'profile'; activeNews: null | TNews } = {
+    section: 'news',
+    activeNews: null,
+};
 
 const activeSectionState = createSlice({
     name: 'activeSectionState',
@@ -10,9 +13,12 @@ const activeSectionState = createSlice({
         setSection: (state, { payload }: { payload: 'news' | 'raiting' | 'profile' }) => {
             state.section = payload;
         },
+        setActiveNews: (state, { payload }: { payload: TNews | null }) => {
+            state.activeNews = payload;
+        },
     },
 });
 
-export const { setSection } = activeSectionState.actions;
+export const { setSection, setActiveNews } = activeSectionState.actions;
 
 export default activeSectionState;

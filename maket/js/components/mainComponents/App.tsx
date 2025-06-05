@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './layout';
 import MainRoute from '../routes/mainRoute';
 import Admin from '../routes/admin';
 import useAppDispatch from '@js/hooks/useAppDispatch';
-import tgAuth from '@js/api/tgAuth';
+import useAuth from '@js/hooks/user/useAuth';
 
 export default () => {
-    const dispatch = useAppDispatch();
+    const { pathname } = useLocation();
+    if (!pathname.includes('admin')) {
+        useAuth();
+    }
+
     useEffect(() => {
-        tgAuth(dispatch);
         const reloadTime = localStorage.getItem('lastReload');
         const timestamp = Math.floor(new Date().getTime() / 1000);
 

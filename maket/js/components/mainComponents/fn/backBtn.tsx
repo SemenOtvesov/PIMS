@@ -1,10 +1,20 @@
+import useAppDispatch from '@js/hooks/useAppDispatch';
+import useAppSelector from '@js/hooks/useAppSelector';
+import { setActiveNews } from '@js/state/activeSection/activeSectionState';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default () => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+
+    const { activeNews, section } = useAppSelector(state => state.activeSectionState);
+
     useEffect(() => {
+        if (section == 'news' && activeNews) {
+            dispatch(setActiveNews(null));
+        }
         if (location.pathname == '/') {
             // @ts-ignore: Unreachable code error
             window.Telegram.WebApp.BackButton.hide();

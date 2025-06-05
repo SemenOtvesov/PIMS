@@ -1,47 +1,20 @@
-export type Tlocation = {
-    totalElements: number;
-    totalPages: number;
-    first: boolean;
-    last: boolean;
-    size: number;
-    content: [
-        {
-            id: string;
-            name: string;
-            content: string;
-            awards: [
-                {
-                    id: string;
-                    awardTitle: string;
-                    awardDescription: string;
-                    awardImage: string;
-                },
-            ];
-        },
-    ];
-    number: number;
-    sort: {
-        empty: boolean;
-        sorted: boolean;
-        unsorted: boolean;
-    };
-    numberOfElements: number;
-    pageable: {
-        offset: number;
-        sort: {
-            empty: boolean;
-            sorted: boolean;
-            unsorted: boolean;
-        };
-        pageNumber: number;
-        pageSize: number;
-        paged: boolean;
-        unpaged: boolean;
-    };
-    empty: boolean;
-};
+import { Taward, TawardUser } from './awards';
+import { TbaseReqSchema } from './baseReqSchema';
 
-export type Taward = {
+export type Tlocation = {
+    id: string;
     name: string;
     address: string;
+    locationImage: string;
+    awards: Array<Taward>;
 };
+export type TlocationUser = {
+    id: string;
+    name: string;
+    address: string;
+    locationImage: string;
+    locationAwards: Array<TawardUser>;
+};
+
+export type TreqLocation = TbaseReqSchema<Tlocation>;
+export type TreqLocationUser = TbaseReqSchema<TlocationUser>;

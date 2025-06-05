@@ -19,30 +19,57 @@ import Chip from '@mui/material/Chip';
 // @ts-ignore: Unreachable code error
 import cardAdminBack from '@maket/img/cardAdminBack.png';
 import { Button } from '@mui/material';
+import useAppDispatch from '@js/hooks/useAppDispatch';
+import addLocationAward from '@js/api/admin/addLocationAward';
+import useAppSelector from '@js/hooks/useAppSelector';
+import adduserAward from '@js/api/admin/adduserAward';
 
-export default ({ actions, confirmButton }: { actions?: boolean; confirmButton?: boolean }) => {
+export default ({
+    content,
+    actions,
+    names,
+    typeCard,
+    initChip,
+    confirmButton,
+}: {
+    content: { title: string; text: string; text2?: string; image?: string };
+    names?: Array<{ title: string; id: string; targetId: string }>;
+    initChip?: Array<string>;
+    typeCard?: 'user' | 'location';
+    actions?: boolean;
+    confirmButton?: { confirmFn: () => void; rejectFn: () => void };
+}) => {
     return (
         <Card sx={{ flex: '0 0 19vw', width: '80vw', minWidth: '19vw', maxWidth: '19vw' }}>
             <CardActionArea>
-                <CardMedia component="img" height="140" image={cardAdminBack} alt="green iguana" />
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={content.image ? content.image : cardAdminBack}
+                    alt="green iguana"
+                />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                        {content.title}
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                        {content.text}
                     </Typography>
+                    {content.text2 && (
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                            {content.text2}
+                        </Typography>
+                    )}
                 </CardContent>
             </CardActionArea>
-            {actions ? (
+            {actions && names ? (
                 <CardActions>
-                    <SelectChip />
+                    <SelectChip names={names} initChip={initChip} typeCard={typeCard} />
                 </CardActions>
             ) : (
                 ''
             )}
-            {confirmButton ? <Butons /> : ''}
+            {confirmButton ? <Butons confirmButton={confirmButton} /> : ''}
         </Card>
     );
 };
@@ -57,19 +84,6 @@ const MenuProps = {
     },
 };
 
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
-
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
     return {
         fontWeight: personName.includes(name)
@@ -78,14 +92,36 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
     };
 }
 
-function SelectChip() {
+function SelectChip({
+    names,
+    initChip,
+    typeCard,
+}: {
+    names: Array<{ title: string; id: string; targetId: string }>;
+    initChip?: Array<string>;
+    typeCard?: 'user' | 'location';
+}) {
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState<string[]>([]);
+    const dispatch = useAppDispatch();
+    const adminToken = useAppSelector(state => state.adminState.token);
+    const [personName, setPersonName] = React.useState<string[]>(initChip || []);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
             target: { value },
         } = event;
+
+        const award = names.find(el => el.title == value[value.length - 1]);
+        const awardId = award?.id;
+        const targetId = award?.targetId;
+        if (awardId && targetId) {
+            if (typeCard == 'user') {
+                adduserAward(dispatch, adminToken, awardId, targetId);
+            } else {
+                addLocationAward(dispatch, adminToken, awardId, targetId);
+            }
+        }
+
         setPersonName(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
@@ -114,11 +150,11 @@ function SelectChip() {
                 >
                     {names.map(name => (
                         <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, personName, theme)}
+                            key={name.id}
+                            value={name.title}
+                            style={getStyles(name.title, personName, theme)}
                         >
-                            {name}
+                            {name.title}
                         </MenuItem>
                     ))}
                 </Select>
@@ -127,15 +163,31 @@ function SelectChip() {
     );
 }
 
-console.log('sdfsdf');
-
-function Butons() {
+function Butons({
+    confirmButton,
+}: {
+    confirmButton: { confirmFn: () => void; rejectFn: () => void };
+}) {
     return (
         <div style={{ display: 'flex', gap: '2em', margin: '1em' }}>
-            <Button style={{ flex: '1 1' }} variant="contained" color="success">
+            <Button
+                style={{ flex: '1 1' }}
+                onClick={() => {
+                    confirmButton.confirmFn();
+                }}
+                variant="contained"
+                color="success"
+            >
                 Подтвердить
             </Button>
-            <Button style={{ flex: '1 1' }} variant="contained" color="error">
+            <Button
+                style={{ flex: '1 1' }}
+                onClick={() => {
+                    confirmButton.rejectFn();
+                }}
+                variant="contained"
+                color="error"
+            >
                 Отклонить
             </Button>
         </div>

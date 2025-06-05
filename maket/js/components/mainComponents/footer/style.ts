@@ -16,14 +16,29 @@ export default () => {
             display: 'flex',
             justifyContent: 'space-between',
 
-            backgroundColor: '#FFF1D2',
+            backgroundColor: '#E3E3E3',
             padding: '0.5rem 2rem',
-            '-webkit-tap-highlight-color': 'transparent',
+            WebkitTapHighlightColor: 'transparent',
+
+            boxShadow: '0 0 5px 1px #00000010',
         }),
-        Item: styled.div({}),
+        Item: styled.div({
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0em',
+            alignItems: 'center',
+            justifyContent: 'center',
+
+            color: '#6E777F',
+            transition: '0.3s',
+
+            '&.active': {
+                color: '#000',
+            },
+        }),
         IconBox: styled.div({}),
-        Icon: styled.div({}),
-        ItemText: styled.div({}),
+        Icon: styled.div({ fontSize: '2.5em', color: 'inherit' }),
+        ItemText: styled.div({ fontWeight: 600, fontSize: '0.875rem', color: 'inherit' }),
         size,
     };
 };

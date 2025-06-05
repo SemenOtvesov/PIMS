@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './style';
 import { Box, Divider, Stack, TextField, Typography } from '@mui/material';
-import { Tlocation } from '@js/types/state/location';
 import Card from '@js/components/middleComponents/card';
 
 import { styled } from '@mui/material/styles';
@@ -9,16 +8,19 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 import { Control, SubmitHandler, useForm, useFormState } from 'react-hook-form';
-import addLocations from '@js/api/addLocations';
+import addLocations from '@js/api/admin/addLocations';
 import useAppSelector from '@js/hooks/useAppSelector';
+import { adminApi } from '@js/api/admin/indexQuery';
 
 type Tprops = {};
 
 export default ({}: Tprops) => {
     const { Container, Item, ItemTitle, CardList } = style();
 
-    //какой то стейт с локациями
-    const locations: Array<Tlocation> = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    const adminToken = useAppSelector(state => state.adminState.token);
+    const { data: userData } = adminApi.useGetUsersQuery(adminToken) || [];
+    const { data: locationData, refetch } = adminApi.useGetLocationQuery(adminToken) || [];
+    const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
 
     return (
         <Container>
@@ -28,20 +30,47 @@ export default ({}: Tprops) => {
                 <Typography variant="h5">Локации</Typography>
                 <Divider />
                 <Typography>Создать новую</Typography>
-                <CreateForm />
+                <CreateForm refetch={refetch} />
                 <Divider />
                 <Typography>Список существующих</Typography>
                 <CardList>
-                    {locations.map(el => (
-                        <Card actions />
+                    {locationData?.content.length == 0 && <>Пока что пусто</>}
+                    {locationData?.content.map((el, i) => (
+                        <Card
+                            key={el.name + i}
+                            actions
+                            content={{
+                                title: el.name,
+                                text: el.address,
+                                image: 'data:image/jpeg;base64,' + el.locationImage,
+                            }}
+                            names={awardsData?.content.map(n => ({
+                                title: n.name,
+                                id: n.id,
+                                targetId: el.id,
+                            }))}
+                            initChip={el.locationAwards?.map(el => el.awardTitle)}
+                        />
                     ))}
                 </CardList>
             </Item>
             <Item>
                 <Typography variant="h5">Сотрудники</Typography>
                 <CardList>
-                    {locations.map(el => (
-                        <Card actions />
+                    {userData?.content.length == 0 && <>Пока что пусто</>}
+                    {userData?.content.map((el, i) => (
+                        <Card
+                            actions
+                            key={i}
+                            content={{ title: el.firstName + ' ' + el.lastName, text: el.phone }}
+                            names={awardsData?.content.map(n => ({
+                                title: n.name,
+                                id: n.id,
+                                targetId: el.id,
+                            }))}
+                            typeCard="user"
+                            initChip={el.employeeAwards?.map(el => el.awardTitle)}
+                        />
                     ))}
                 </CardList>
             </Item>
@@ -66,7 +95,7 @@ type Inputs = {
     description: string;
     photo: File;
 };
-function CreateForm() {
+function CreateForm({ refetch }: { refetch: any }) {
     const adminToken = useAppSelector(state => state.adminState.token);
     const dispatch = useAppDispatch();
     const { FromWrapper, FormLoginBox } = style();
@@ -75,7 +104,7 @@ function CreateForm() {
     const { handleSubmit, register, control } = form;
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        addLocations(dispatch, adminToken, data.name, data.description, data.photo);
+        addLocations(dispatch, adminToken, data.name, data.description, data.photo, refetch);
     };
 
     return (
@@ -91,7 +120,6 @@ function CreateForm() {
                     style={{ width: '40vw', margin: '0' }}
                     label="Название"
                     id="outlined-size-small"
-                    defaultValue="Название"
                     size="small"
                     {...register('name', { required: true })}
                 />
@@ -99,7 +127,6 @@ function CreateForm() {
                     style={{ width: '40vw', margin: '0' }}
                     label="Описание"
                     id="outlined-size-small"
-                    defaultValue="Описание"
                     size="small"
                     {...register('description', { required: true })}
                 />

@@ -7,15 +7,16 @@ import Allert from './fn/allert';
 import Resize from './fn/resize';
 import BackBtn from './fn/backBtn';
 import useAdminToken from '@js/hooks/admin/useAdminToken';
-import useAdminAllQuery from '@js/hooks/admin/useAdminAllQuery';
+import NotLoginBlur from './fn/notLoginBlur';
 
 export const LayoutContext = createContext<TlayoutContext>({});
 
 export default () => {
     const { pathname } = useLocation();
 
-    useAdminToken();
-    useAdminAllQuery();
+    if (pathname.includes('admin')) {
+        useAdminToken();
+    }
 
     useEffect(() => {
         if (pathname.includes('admin')) {
@@ -28,6 +29,8 @@ export default () => {
     return (
         <LayoutContext.Provider value={'val'}>
             {/* <Header /> */}
+
+            <NotLoginBlur />
 
             <Allert />
             <BackBtn />
