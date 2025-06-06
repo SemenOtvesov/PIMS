@@ -97,6 +97,10 @@ h6 {
   margin: 5px;
 }
 
+div {
+  line-height: 0.875em;
+}
+
 @font-face {
   font-family: "icomoon";
   src: url("../fonts/icomoon.eot?6dqb5o");

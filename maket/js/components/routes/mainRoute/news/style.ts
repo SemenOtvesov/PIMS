@@ -24,7 +24,13 @@ export default () => {
             backgroundColor: '#FFF2D3',
             zIndex: 0,
         }),
-        Title: styled.div({ textAlign: 'center', fontWeight: 600, fontSize: '2.5em', zIndex: 1 }),
+        Title: styled.div({
+            textAlign: 'center',
+            fontWeight: 600,
+            fontSize: '2.5em',
+            zIndex: 1,
+            transform: 'scale(1, 0.9)',
+        }),
         Main: styled.div({
             display: 'flex',
             flexDirection: 'column',
