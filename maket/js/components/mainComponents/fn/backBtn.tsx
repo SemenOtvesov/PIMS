@@ -26,7 +26,7 @@ export default () => {
     }, [location.pathname]);
 
     useEffect(() => {
-        if (section != 'news' && !activeNews) {
+        if (section != 'news' || !activeNews) {
             // @ts-ignore: Unreachable code error
             window.Telegram.WebApp.BackButton.hide();
         } else {
