@@ -15,9 +15,18 @@ export default async (
     const dto = JSON.stringify({ title, description, creator });
 
     const formData = new FormData();
-    formData.append('dto', new Blob([dto], { type: 'application/json' })); // 👈 это важно!
-    console.log(image);
-    formData.append('file', image);
+    formData.append('dto', new Blob([dto], { type: 'application/json' }));
+
+    // Добавляем каждый файл из массива `image`
+    if (Array.isArray(image)) {
+        image.forEach(file => {
+            formData.append('file', file); // 👈 Axios сам добавит имя файла
+        });
+    }
+    // Если `image` — одиночный файл (обратная совместимость)
+    else if (image instanceof File || image instanceof Blob) {
+        formData.append('file', image);
+    }
 
     const res = await axios.post(baseUrl + '/api/admin/add-news', formData, {
         headers: {

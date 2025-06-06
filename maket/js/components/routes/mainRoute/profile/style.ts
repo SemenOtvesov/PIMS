@@ -45,8 +45,15 @@ export default () => {
             fontSize: '1.75em',
             fontWeight: 600,
             textAlign: 'center',
+            transform: 'scale(1, 0.857)',
         }),
-        Phone: styled.div({ zIndex: 1, fontSize: '1.75em', fontWeight: 600, textAlign: 'center' }),
+        Phone: styled.div({
+            zIndex: 1,
+            fontSize: '1.75em',
+            fontWeight: 600,
+            textAlign: 'center',
+            transform: 'scale(1, 0.857)',
+        }),
         ImageAbsolute: styled.img({
             position: 'fixed',
             height: '1em',

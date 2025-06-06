@@ -27,7 +27,9 @@ export default ({ item, itemNum }: Tprops) => {
                     className="hide"
                 >
                     Награды: {item.locationAwards.length == 0 ? 'Пока нет' : ''}{' '}
-                    {item.locationAwards?.map(el => el.awardTitle + ', ')}
+                    {item.locationAwards?.map((el, i) =>
+                        i == 0 ? el.awardTitle : ', ' + el.awardTitle,
+                    )}
                 </Text>
             </TextBox>
         </Container>

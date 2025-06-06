@@ -12,7 +12,12 @@ export default () => {
             zIndex: '1',
             width: '100%',
         }),
-        Title: styled.div({ fontSize: '1.5em', fontWeight: 800, textAlign: 'center' }),
+        Title: styled.div({
+            fontSize: '1.5em',
+            fontWeight: 800,
+            textAlign: 'center',
+            transform: 'scale(1, 0.857)',
+        }),
         Main: styled.div({ display: 'flex', gap: '5px', flexWrap: 'wrap' }),
         Achievement: styled.div({
             width: 'calc((100% - 10px) / 3)',
@@ -44,7 +49,10 @@ export default () => {
             fontSize: '1.2em',
             fontWeight: 700,
         }),
-        AchievementText: styled.div({ fontWeight: 600, fontSize: '0.875em' }),
+        AchievementText: styled.div({
+            fontWeight: 600,
+            fontSize: '0.875em',
+        }),
         size,
     };
 };
