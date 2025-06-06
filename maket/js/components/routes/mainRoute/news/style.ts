@@ -27,7 +27,7 @@ export default () => {
         Title: styled.div({
             textAlign: 'center',
             fontWeight: 600,
-            fontSize: '2.5em',
+            fontSize: '40px',
             zIndex: 1,
             transform: 'scale(1, 0.857)',
         }),
