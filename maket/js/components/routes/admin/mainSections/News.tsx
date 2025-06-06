@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './style';
 import { Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -43,7 +43,7 @@ export default ({}: Tprops) => {
                                 title: el.title,
                                 text: el.content,
                                 text2: el.creator,
-                                image: 'data:image/jpeg;base64,' + el.images[0],
+                                image: 'data:image/jpeg;base64,' + (el.images ? el.images[0] : ''),
                             }}
                         />
                     ))}
@@ -69,7 +69,7 @@ type Inputs = {
     name: string;
     description: string;
     creator: string;
-    photo: [File];
+    photo: Array<File>;
 };
 function CreateForm({ refetch }: { refetch: any }) {
     const adminToken = useAppSelector(state => state.adminState.token);
@@ -78,7 +78,7 @@ function CreateForm({ refetch }: { refetch: any }) {
     const { FromWrapper, FormLoginBox } = style();
 
     const form = useForm<Inputs>();
-    const { handleSubmit, register, control } = form;
+    const { handleSubmit, register, control, setValue } = form;
 
     const onSubmit: SubmitHandler<Inputs> = data => {
         addNews(
@@ -92,6 +92,11 @@ function CreateForm({ refetch }: { refetch: any }) {
         );
     };
 
+    const [selectedFiles, setSelectedFiles] = useState([]);
+
+    useEffect(() => {
+        setValue('photo', selectedFiles);
+    }, [selectedFiles]);
     return (
         <Box
             component="form"
@@ -133,7 +138,11 @@ function CreateForm({ refetch }: { refetch: any }) {
                     Добавить фото
                     <VisuallyHiddenInput
                         type="file"
-                        {...register('photo', { required: true })}
+                        // {...register('photo', { required: true })}
+                        onChange={e => {
+                            const files = Array.from(e.target.files);
+                            setSelectedFiles(p => [...p, files[0]]);
+                        }}
                         multiple
                     />
                 </Button>

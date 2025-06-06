@@ -9,14 +9,15 @@ export default async (
     title: string,
     description: string,
     creator: string,
-    image: [File],
+    image: Array<File>,
     refetchFn?: () => void,
 ) => {
     const dto = JSON.stringify({ title, description, creator });
 
     const formData = new FormData();
     formData.append('dto', new Blob([dto], { type: 'application/json' })); // 👈 это важно!
-    formData.append('file', image[0]);
+    console.log(image);
+    formData.append('file', image);
 
     const res = await axios.post(baseUrl + '/api/admin/add-news', formData, {
         headers: {

@@ -29,7 +29,7 @@ export default () => {
             fontWeight: 600,
             fontSize: '2.5em',
             zIndex: 1,
-            transform: 'scale(1, 0.9)',
+            transform: 'scale(1, 0.857)',
         }),
         Main: styled.div({
             display: 'flex',

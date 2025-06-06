@@ -19,7 +19,11 @@ export default ({ item, full }: Tprops) => {
             }}
         >
             <Image
-                src={item.images[0] ? 'data:image/jpeg;base64,' + item.images[0] : cardAdminBack}
+                src={
+                    item.images && item.images[0]
+                        ? 'data:image/jpeg;base64,' + item.images[0]
+                        : cardAdminBack
+                }
             ></Image>
             <TextBox>
                 <Title>{item.title}</Title>

@@ -65,7 +65,7 @@ const VisuallyHiddenInput = styled('input')({
 type Inputs = {
     name: string;
     description: string;
-    photo: [File];
+    // photo: [File];
 };
 function CreateForm({ refetch }: { refetch: any }) {
     const adminToken = useAppSelector(state => state.adminState.token);
@@ -76,7 +76,7 @@ function CreateForm({ refetch }: { refetch: any }) {
     const { handleSubmit, register, control } = form;
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        addAward(dispatch, adminToken, data.name, data.description, data.photo, refetch);
+        addAward(dispatch, adminToken, data.name, data.description, /*data.photo,*/ refetch);
     };
 
     return (
@@ -102,7 +102,7 @@ function CreateForm({ refetch }: { refetch: any }) {
                     size="small"
                     {...register('description', { required: true })}
                 />
-                <Button
+                {/* <Button
                     style={{ width: '40vw' }}
                     component="label"
                     role={undefined}
@@ -116,7 +116,7 @@ function CreateForm({ refetch }: { refetch: any }) {
                         {...register('photo', { required: true })}
                         multiple
                     />
-                </Button>
+                </Button> */}
                 <IsoleteBtn control={control} />
             </FromWrapper>
         </Box>
