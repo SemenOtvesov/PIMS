@@ -12,9 +12,6 @@ export default () => {
     const { activeNews, section } = useAppSelector(state => state.activeSectionState);
 
     useEffect(() => {
-        if (section == 'news' && activeNews) {
-            dispatch(setActiveNews(null));
-        }
         if (location.pathname == '/') {
             // @ts-ignore: Unreachable code error
             window.Telegram.WebApp.BackButton.hide();
@@ -27,5 +24,21 @@ export default () => {
             });
         }
     }, [location.pathname]);
+
+    useEffect(() => {
+        if (section != 'news' && !activeNews) {
+            // @ts-ignore: Unreachable code error
+            window.Telegram.WebApp.BackButton.hide();
+        } else {
+            // @ts-ignore: Unreachable code error
+            window.Telegram.WebApp.BackButton.show();
+            // @ts-ignore: Unreachable code error
+            window.Telegram.WebApp.BackButton.onClick(() => {
+                if (section == 'news' && activeNews) {
+                    dispatch(setActiveNews(null));
+                }
+            });
+        }
+    }, [section, activeNews]);
     return <></>;
 };
