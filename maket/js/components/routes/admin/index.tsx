@@ -22,16 +22,24 @@ import FormAuth from './formAuth';
 
 const drawerWidth = 240;
 
-const drawerEl = ['Присвоить награду', 'Доп. Награды', 'Новости', 'Одобрение регистраций'];
-const drawerElLink: ['AssignReward', 'AddAwards', 'News', 'ApprovalRegistrations'] = [
-    'AssignReward',
+const drawerEl = [
+    'Присвоить награду локациям',
+    'Присвоить награду сотрудникам',
+    'Доп. Награды',
+    'Новости',
+    'Одобрение регистраций',
+];
+const drawerElLink: [
+    'AssignRewardLocations',
+    'AssignRewardUsers',
     'AddAwards',
     'News',
     'ApprovalRegistrations',
-];
+] = ['AssignRewardLocations', 'AssignRewardUsers', 'AddAwards', 'News', 'ApprovalRegistrations'];
 
 export default function ClippedDrawer() {
-    const [activeSection, setactiveSection] = React.useState<TactiveSection>('AssignReward');
+    const [activeSection, setactiveSection] =
+        React.useState<TactiveSection>('AssignRewardLocations');
 
     const adminToken = useAppSelector(state => state.adminState.token);
 

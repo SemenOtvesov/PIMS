@@ -31,23 +31,36 @@ export default ({
     typeCard,
     initChip,
     confirmButton,
+    list,
 }: {
     content: { title: string; text: string; text2?: string; image?: string };
     names?: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
     typeCard?: 'user' | 'location';
     actions?: boolean;
+    list?: boolean;
     confirmButton?: { confirmFn: () => void; rejectFn: () => void };
 }) => {
     return (
-        <Card sx={{ flex: '0 0 19vw', width: '80vw', minWidth: '19vw', maxWidth: '19vw' }}>
+        <Card
+            sx={{
+                flex: list ? '1 1' : '0 0 19vw',
+                width: '80vw',
+                minWidth: '19vw',
+                maxWidth: list ? '100%' : '19vw',
+                display: 'flex',
+                flexDirection: list ? 'row' : 'column',
+            }}
+        >
             <CardActionArea>
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image={content.image ? content.image : cardAdminBack}
-                    alt="green iguana"
-                />
+                {!list && (
+                    <CardMedia
+                        component="img"
+                        height="140"
+                        image={content.image ? content.image : cardAdminBack}
+                        alt="green iguana"
+                    />
+                )}
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         {content.title}
@@ -63,8 +76,8 @@ export default ({
                 </CardContent>
             </CardActionArea>
             {actions && names ? (
-                <CardActions>
-                    <SelectChip names={names} initChip={initChip} typeCard={typeCard} />
+                <CardActions style={{ width: list ? '50vw' : '', paddingRight: '1.5em' }}>
+                    <SelectChip names={names} initChip={initChip} typeCard={typeCard} list={list} />
                 </CardActions>
             ) : (
                 ''
@@ -96,10 +109,12 @@ function SelectChip({
     names,
     initChip,
     typeCard,
+    list,
 }: {
     names: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
     typeCard?: 'user' | 'location';
+    list?: boolean;
 }) {
     const theme = useTheme();
     const dispatch = useAppDispatch();
@@ -130,7 +145,7 @@ function SelectChip({
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 'calc(19vw - 2em)' }}>
+            <FormControl sx={{ m: 1, width: list ? '40vw' : 'calc(19vw - 2em)' }}>
                 <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"

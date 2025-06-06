@@ -1,1 +1,6 @@
-export type TactiveSection = 'AssignReward' | 'AddAwards' | 'News' | 'ApprovalRegistrations';
+export type TactiveSection =
+    | 'AssignRewardLocations'
+    | 'AssignRewardUsers'
+    | 'AddAwards'
+    | 'News'
+    | 'ApprovalRegistrations';

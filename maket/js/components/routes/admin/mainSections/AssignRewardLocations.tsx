@@ -18,7 +18,6 @@ export default ({}: Tprops) => {
     const { Container, Item, ItemTitle, CardList } = style();
 
     const adminToken = useAppSelector(state => state.adminState.token);
-    const { data: userData } = adminApi.useGetUsersQuery(adminToken) || [];
     const { data: locationData, refetch } = adminApi.useGetLocationQuery(adminToken) || [];
     const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
 
@@ -50,26 +49,6 @@ export default ({}: Tprops) => {
                                 targetId: el.id,
                             }))}
                             initChip={el.locationAwards?.map(el => el.awardTitle)}
-                        />
-                    ))}
-                </CardList>
-            </Item>
-            <Item>
-                <Typography variant="h5">Сотрудники</Typography>
-                <CardList>
-                    {userData?.content.length == 0 && <>Пока что пусто</>}
-                    {userData?.content.map((el, i) => (
-                        <Card
-                            actions
-                            key={i}
-                            content={{ title: el.firstName + ' ' + el.lastName, text: el.phone }}
-                            names={awardsData?.content.map(n => ({
-                                title: n.name,
-                                id: n.id,
-                                targetId: el.id,
-                            }))}
-                            typeCard="user"
-                            initChip={el.employeeAwards?.map(el => el.awardTitle)}
                         />
                     ))}
                 </CardList>
