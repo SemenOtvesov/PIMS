@@ -10,14 +10,9 @@ export default () => {
     const tg = window.Telegram.WebApp;
     const dispacth = useAppDispatch();
 
-    window.Telegram.WebApp.MainButton.setText('Подтвердить номер').show();
-
-    // Обработка нажатия
-    window.Telegram.WebApp.MainButton.onClick(() => {
-        // Открываем чат с ботом для запроса номера
-        window.Telegram.WebApp.sendData(JSON.stringify({ action: 'request_phone' }));
-        // Или просто закрываем WebApp, чтобы пользователь вручную написал боту
-        window.Telegram.WebApp.close();
+    tg.MainButton.setText('Подтвердить номер').show();
+    tg.MainButton.onClick(() => {
+        window.location.href = 'https://t.me/pims_inside_bot?start=request_phone';
     });
 
     const reqBody: TreqAuth = {
