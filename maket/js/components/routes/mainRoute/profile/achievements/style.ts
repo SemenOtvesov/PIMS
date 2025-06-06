@@ -12,10 +12,10 @@ export default () => {
             zIndex: '1',
             width: '100%',
         }),
-        Title: styled.div({ fontSize: '1.5em', fontWeight: 600, textAlign: 'center' }),
-        Main: styled.div({ display: 'flex', gap: '1em', flexWrap: 'wrap' }),
+        Title: styled.div({ fontSize: '1.5em', fontWeight: 800, textAlign: 'center' }),
+        Main: styled.div({ display: 'flex', gap: '5px', flexWrap: 'wrap' }),
         Achievement: styled.div({
-            width: 'calc((100% - 2em) / 3)',
+            width: 'calc((100% - 10px) / 3)',
             aspectRatio: 1,
             display: 'flex',
             flexDirection: 'column',
