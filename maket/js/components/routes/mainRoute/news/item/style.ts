@@ -8,6 +8,7 @@ export default () => {
             borderRadius: '10px',
             overflow: 'hidden',
             minHeight: 'fit-content',
+            height: 'fit-content',
         }),
         Image: styled.img({
             width: '100%',
