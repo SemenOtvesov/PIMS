@@ -38,6 +38,7 @@ body {
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  letter-spacing: -0.43px;
   font-family: "Proxima Nova", sans-serif;
   background: linear-gradient(180deg, rgb(174, 174, 174) 0%, rgb(191, 191, 189) 9%, rgb(226, 225, 224) 31%, rgb(225, 222, 221) 51%, rgb(231, 229, 228) 69%, rgb(231, 229, 228) 86%);
 }
