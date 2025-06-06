@@ -13,7 +13,11 @@ export default ({ user }: { user: TuserUser | undefined }) => {
             <Main>
                 {user?.employeeAwards?.map((el, i) => (
                     <Achievement className={`type${styleList[i]}`}>
-                        <AchievementTitle>{el.awardTitle}</AchievementTitle>
+                        <AchievementTitle
+                            className={`${Number.isNaN(+el.awardTitle) ? '' : 'number'}`}
+                        >
+                            {el.awardTitle}
+                        </AchievementTitle>
                         <AchievementText>{el.awardDescription}</AchievementText>
                     </Achievement>
                 ))}

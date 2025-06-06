@@ -19,14 +19,19 @@ export default () => {
             background: '#fff',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.25em',
+            gap: '0.5em',
             padding: '1em',
 
             flex: '0 1 auto',
             borderRadius: '0 0 10px 10px',
         }),
-        Title: styled.div({ fontSize: '1.25em', fontWeight: 600 }),
-        Text: styled.div({ fontSize: '0.875em' }),
+        Title: styled.div({
+            fontSize: '20px',
+            transform: 'scale(1, 0.9)',
+            fontWeight: 800,
+            letterSpacing: '-0.43px',
+        }),
+        Text: styled.div({ fontSize: '15px', fontWeight: 600 }),
         MainContent: styled.div({ fontSize: '0.875em' }),
         size,
     };

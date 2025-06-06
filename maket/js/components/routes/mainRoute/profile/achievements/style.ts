@@ -27,6 +27,8 @@ export default () => {
             justifyContent: 'space-between',
             padding: '1em',
 
+            boxShadow: '0 0 10px 1px #00000010',
+
             borderRadius: 10,
 
             '&.type1': {
@@ -46,12 +48,16 @@ export default () => {
             },
         }),
         AchievementTitle: styled.div({
-            fontSize: '1.2em',
+            fontSize: '1.35em',
             fontWeight: 700,
+
+            '&.number': {
+                fontSize: '1.75em',
+            },
         }),
         AchievementText: styled.div({
             fontWeight: 600,
-            fontSize: '0.875em',
+            fontSize: '1em',
         }),
         size,
     };
