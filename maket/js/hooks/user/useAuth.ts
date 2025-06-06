@@ -10,15 +10,11 @@ export default () => {
     const tg = window.Telegram.WebApp;
     const dispacth = useAppDispatch();
 
-    tg.MainButton.setText('Подтвердить номер').show();
-    tg.MainButton.onClick(() => {
-        window.location.href = 'https://t.me/pims_inside_bot?start=request_phone';
-    });
-
+    console.log(tg.initDataUnsafe);
     const reqBody: TreqAuth = {
         dto: {
             tgId: tg.initDataUnsafe.user.id,
-            phoneNumber: '',
+            phoneNumber: tg.initDataUnsafe.user.phone_number || '',
             firstName: tg.initDataUnsafe.user.first_name,
             lastName: tg.initDataUnsafe.user.last_name,
             username: tg.initDataUnsafe.user.username,
