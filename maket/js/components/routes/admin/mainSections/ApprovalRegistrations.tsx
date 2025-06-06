@@ -15,7 +15,7 @@ export default ({}: Tprops) => {
     const { Container, Item, ItemTitle, CardList } = style();
 
     const adminToken = useAppSelector(state => state.adminState.token);
-    const { data } = adminApi.useGetPendingApprovalsQuery(adminToken) || [];
+    const { data, refetch } = adminApi.useGetPendingApprovalsQuery(adminToken) || [];
 
     return (
         <Container>
@@ -29,10 +29,10 @@ export default ({}: Tprops) => {
                             key={i}
                             confirmButton={{
                                 confirmFn: () => {
-                                    aproveUser(dispatch, adminToken, el.id);
+                                    aproveUser(dispatch, adminToken, el.id, refetch);
                                 },
                                 rejectFn: () => {
-                                    declineUser(dispatch, adminToken, el.id);
+                                    declineUser(dispatch, adminToken, el.id, refetch);
                                 },
                             }}
                             content={{

@@ -23,7 +23,7 @@ export default ({ item, full }: Tprops) => {
             ></Image>
             <TextBox>
                 <Title>{item.title}</Title>
-                <Text>{item.publishDate || 'Дата не указана'}</Text>
+                <Text>{item.publishDate?.split('T')[0] || 'Дата не указана'}</Text>
                 {full && <MainContent>{item.content}</MainContent>}
             </TextBox>
         </Container>
