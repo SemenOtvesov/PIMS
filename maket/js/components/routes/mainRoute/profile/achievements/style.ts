@@ -24,7 +24,21 @@ export default () => {
 
             borderRadius: 10,
 
-            backgroundColor: '#EBEBEB',
+            '&.type1': {
+                backgroundColor: '#EBEBEB',
+            },
+            '&.type2': {
+                backgroundColor: '#fff',
+            },
+            '&.type3': {
+                backgroundColor: '#FA8E7C',
+            },
+            '&.type4': {
+                backgroundColor: '#FFE4D3',
+            },
+            '&.type5': {
+                backgroundColor: '#FCB9A7',
+            },
         }),
         AchievementTitle: styled.div({
             fontSize: '1.2em',

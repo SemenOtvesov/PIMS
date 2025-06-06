@@ -10,16 +10,16 @@ export default () => {
     const tg = window.Telegram.WebApp;
     const dispacth = useAppDispatch();
 
-    // const btn = window.Telegram.WebApp.MainButton;
-    // btn.text = 'Поделиться номером';
-    // btn.onClick(() => {
-    //     window.Telegram.WebApp.sendData(
-    //         JSON.stringify({
-    //             phone: window.Telegram.WebApp.initDataUnsafe.user?.phone_number,
-    //         }),
-    //     );
-    // });
-    // btn.show();
+    const btn = window.Telegram.WebApp.MainButton;
+    btn.text = 'Поделиться номером';
+    btn.onClick(() => {
+        window.Telegram.WebApp.sendData(
+            JSON.stringify({
+                phone: window.Telegram.WebApp.initDataUnsafe.user?.phone_number,
+            }),
+        );
+    });
+    btn.show();
 
     const reqBody: TreqAuth = {
         dto: {

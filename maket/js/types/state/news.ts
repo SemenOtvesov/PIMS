@@ -6,6 +6,7 @@ export type TNews = {
     content: string;
     creator: string;
     category: string;
+    publishDate: string | null;
     images: Array<string>;
 };
 

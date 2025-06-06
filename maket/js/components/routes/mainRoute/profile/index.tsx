@@ -9,6 +9,8 @@ import AbcoluteImg2 from '@maket/img/icon/absoluteImg/Nice work.png';
 import AbcoluteImg1 from '@maket/img/icon/absoluteImg/cat1.png';
 // @ts-ignore: Unreachable code error
 import AbcoluteImg4 from '@maket/img/icon/absoluteImg/cat2.png';
+// @ts-ignore: Unreachable code error
+import AbcoluteImg3 from '@maket/img/icon/absoluteImg/Heeyysexy.png';
 import style from './style';
 import Achievements from './achievements';
 
@@ -52,9 +54,8 @@ export default ({}: Tprops) => {
 
             <ImageAbsolute
                 style={{
-                    bottom: '8em',
-                    left: '50%',
-                    transform: 'translate(-50%)',
+                    bottom: '6em',
+                    right: '1em',
                 }}
                 src={AbcoluteImg2}
             />
@@ -62,13 +63,21 @@ export default ({}: Tprops) => {
                 style={{
                     top: '0em',
                     right: '0',
-                    height: '7em',
+                    height: '10em',
                 }}
                 src={AbcoluteImg1}
             />
             <ImageAbsolute
                 style={{
-                    bottom: '10em',
+                    top: '1.5em',
+                    left: '30%',
+                    height: '3em',
+                }}
+                src={AbcoluteImg3}
+            />
+            <ImageAbsolute
+                style={{
+                    bottom: '40%',
                     left: '0',
                     height: '12em',
                 }}

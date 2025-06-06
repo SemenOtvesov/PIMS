@@ -5,7 +5,7 @@ export default () => {
     const size = useWindowSizeCheck();
     return {
         Container: styled.div({
-            padding: '2.5em 1em 0',
+            padding: '2.5em 1em 5px',
             display: 'flex',
             flexDirection: 'column',
             gap: '2.5em',

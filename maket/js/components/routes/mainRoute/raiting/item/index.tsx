@@ -14,7 +14,18 @@ export default ({ item, itemNum }: Tprops) => {
                     {itemNum}.{'  '}
                     {item.name}
                 </Title>
-                <Text>
+                <Text
+                    onClick={(e: any) => {
+                        if (e.target.className.includes('hide')) {
+                            e.target.classList.add('open');
+                            e.target.classList.remove('hide');
+                        } else {
+                            e.target.classList.remove('open');
+                            e.target.classList.add('hide');
+                        }
+                    }}
+                    className="hide"
+                >
                     Награды: {item.locationAwards.length == 0 ? 'Пока нет' : ''}{' '}
                     {item.locationAwards?.map(el => el.awardTitle + ', ')}
                 </Text>

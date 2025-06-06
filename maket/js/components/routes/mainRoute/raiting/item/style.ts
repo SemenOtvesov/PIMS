@@ -17,7 +17,17 @@ export default () => {
             padding: '0.5em 1em',
         }),
         Title: styled.div({ fontSize: '1.25em', fontWeight: 600 }),
-        Text: styled.div({ fontSize: '0.875em' }),
+        Text: styled.div({
+            fontSize: '0.875em',
+            transition: '0.3s',
+            '&.hide': {
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                height: '1em',
+            },
+            '&.open': { height: 'fit-content' },
+        }),
         MainContent: styled.div({ fontSize: '0.875em' }),
         size,
     };

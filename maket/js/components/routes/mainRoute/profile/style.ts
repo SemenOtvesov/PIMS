@@ -5,7 +5,7 @@ export default () => {
     const size = useWindowSizeCheck();
     return {
         Container: styled.div({
-            padding: '3.5em 1em 0',
+            padding: '3.5em 1em 5px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -14,6 +14,8 @@ export default () => {
             height: 'calc(100vh - 80px)',
             maxHeight: 'calc(100vh - 80px)',
             position: 'relative',
+
+            overflow: 'auto',
         }),
         BackCircle: styled.div({
             position: 'absolute',
