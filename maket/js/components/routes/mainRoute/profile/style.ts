@@ -17,6 +17,7 @@ export default () => {
 
             overflow: 'auto',
         }),
+        AvatarBox: styled.div({ position: 'relative' }),
         BackCircle: styled.div({
             position: 'absolute',
             width: '100%',

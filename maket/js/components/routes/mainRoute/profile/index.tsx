@@ -23,7 +23,7 @@ export default ({}: Tprops) => {
     // @ts-ignore: Unreachable code error
     const tg = window.Telegram.WebApp;
 
-    const { Container, BackCircle, ImageAbsolute, Avatar, UserName, Phone } = style();
+    const { Container, BackCircle, ImageAbsolute, Avatar, UserName, Phone, AvatarBox } = style();
 
     const userToken = useAppSelector(state => state.userState.token);
 
@@ -37,15 +37,26 @@ export default ({}: Tprops) => {
         <Container>
             <BackCircle />
 
-            <Avatar
-                style={{ background: `url(${baseAvatar}) 100%/100%` }}
-                src={`https://t.me/i/userpic/160/${tg.initDataUnsafe.user.id}.jpg`}
-                onLoad={(e: any) => {
-                    if (e.target.width < 10) {
-                        e.target.src = baseAvatar;
-                    }
-                }}
-            />
+            <AvatarBox>
+                <Avatar
+                    style={{ background: `url(${baseAvatar}) 100%/100%` }}
+                    src={`https://t.me/i/userpic/160/${tg.initDataUnsafe.user.id}.jpg`}
+                    onLoad={(e: any) => {
+                        if (e.target.width < 10) {
+                            e.target.src = baseAvatar;
+                        }
+                    }}
+                />
+                <ImageAbsolute
+                    style={{
+                        top: '-20%',
+                        left: '-20%',
+                        height: '3em',
+                        position: 'absolute',
+                    }}
+                    src={AbcoluteImg3}
+                />
+            </AvatarBox>
             <UserName>
                 {tg.initDataUnsafe.user.first_name} {tg.initDataUnsafe.user.last_name}
             </UserName>
@@ -67,14 +78,7 @@ export default ({}: Tprops) => {
                 }}
                 src={AbcoluteImg1}
             />
-            <ImageAbsolute
-                style={{
-                    top: '1.5em',
-                    left: '30%',
-                    height: '3em',
-                }}
-                src={AbcoluteImg3}
-            />
+
             <ImageAbsolute
                 style={{
                     bottom: '40%',
