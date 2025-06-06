@@ -10,16 +10,15 @@ export default () => {
     const tg = window.Telegram.WebApp;
     const dispacth = useAppDispatch();
 
-    const btn = window.Telegram.WebApp.MainButton;
-    btn.text = 'Поделиться номером';
-    btn.onClick(() => {
-        window.Telegram.WebApp.sendData(
-            JSON.stringify({
-                phone: window.Telegram.WebApp.initDataUnsafe.user?.phone_number,
-            }),
-        );
+    window.Telegram.WebApp.MainButton.setText('Подтвердить номер').show();
+
+    // Обработка нажатия
+    window.Telegram.WebApp.MainButton.onClick(() => {
+        // Открываем чат с ботом для запроса номера
+        window.Telegram.WebApp.sendData(JSON.stringify({ action: 'request_phone' }));
+        // Или просто закрываем WebApp, чтобы пользователь вручную написал боту
+        window.Telegram.WebApp.close();
     });
-    btn.show();
 
     const reqBody: TreqAuth = {
         dto: {
