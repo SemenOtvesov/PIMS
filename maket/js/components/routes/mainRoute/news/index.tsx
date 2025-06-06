@@ -45,7 +45,7 @@ export default ({}: Tprops) => {
                     />
                     <ImageAbsolute
                         style={{
-                            top: '6.25em',
+                            top: '5.5em',
                             right: '0.5em',
                         }}
                         src={AbcoluteImg2}

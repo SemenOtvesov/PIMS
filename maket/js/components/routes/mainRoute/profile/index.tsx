@@ -61,7 +61,22 @@ export default ({}: Tprops) => {
                 {tg.initDataUnsafe.user.first_name} {tg.initDataUnsafe.user.last_name}
             </UserName>
             <Phone>Не указан</Phone>
-            <Achievements user={user.data} />
+            <div
+                style={{
+                    position: 'relative',
+                }}
+            >
+                <ImageAbsolute
+                    style={{
+                        top: '-6em',
+                        left: '-1em',
+                        height: '12em',
+                        position: 'absolute',
+                    }}
+                    src={AbcoluteImg4}
+                />
+                <Achievements user={user.data} />
+            </div>
 
             <ImageAbsolute
                 style={{
@@ -77,15 +92,6 @@ export default ({}: Tprops) => {
                     height: '10em',
                 }}
                 src={AbcoluteImg1}
-            />
-
-            <ImageAbsolute
-                style={{
-                    bottom: '40%',
-                    left: '0',
-                    height: '12em',
-                }}
-                src={AbcoluteImg4}
             />
         </Container>
     );
