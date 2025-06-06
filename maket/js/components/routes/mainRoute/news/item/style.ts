@@ -6,13 +6,14 @@ export default () => {
     return {
         Container: styled.div({
             borderRadius: '10px',
-            overflow: 'hidden',
-            minHeight: 'fit-content',
-            height: 'fit-content',
+
+            display: 'flex',
+            flexDirection: 'column',
         }),
         Image: styled.img({
             width: '100%',
             aspectRatio: '2.25/1',
+            borderRadius: '10px 10px 0 0 ',
         }),
         TextBox: styled.div({
             background: '#fff',
@@ -20,6 +21,9 @@ export default () => {
             flexDirection: 'column',
             gap: '0.25em',
             padding: '1em',
+
+            flex: '0 1 auto',
+            borderRadius: '0 0 10px 10px',
         }),
         Title: styled.div({ fontSize: '1.25em', fontWeight: 600 }),
         Text: styled.div({ fontSize: '0.875em' }),
