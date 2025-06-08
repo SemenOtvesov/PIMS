@@ -19,20 +19,30 @@ export default () => {
             background: '#fff',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.5em',
+            gap: '0.35em',
             padding: '1em',
 
             flex: '0 1 auto',
             borderRadius: '0 0 10px 10px',
         }),
+        TextBoxFull: styled.div({
+            background: '#fff',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.35em',
+            padding: '1em',
+
+            flex: '0 1 auto',
+            borderRadius: '10px 10px 0 0',
+        }),
         Title: styled.div({
             fontSize: '20px',
             transform: 'scale(1, 0.9)',
-            fontWeight: 800,
+            fontWeight: 700,
             letterSpacing: '-0.43px',
         }),
-        Text: styled.div({ fontSize: '15px', fontWeight: 600 }),
-        MainContent: styled.div({ fontSize: '0.875em' }),
+        Text: styled.div({ fontSize: '14px', fontWeight: 600, letterSpacing: '-0.43px' }),
+        MainContent: styled.div({ fontSize: '14px', fontWeight: 600, letterSpacing: '-0.43px' }),
         size,
     };
 };

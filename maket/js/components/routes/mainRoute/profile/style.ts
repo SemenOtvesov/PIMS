@@ -43,18 +43,24 @@ export default () => {
         UserName: styled.div({
             zIndex: 1,
             fontSize: '1.75em',
-            fontWeight: 600,
+            fontWeight: 700,
             textAlign: 'center',
             transform: 'scale(1, 0.857)',
+            letterSpacing: '-0.43px',
         }),
         Phone: styled.div({
             zIndex: 1,
             fontSize: '1.75em',
-            fontWeight: 600,
+            fontWeight: 700,
             textAlign: 'center',
             transform: 'scale(1, 0.857)',
+            letterSpacing: '-0.43px',
         }),
         ImageAbsolute: styled.img({
+            position: 'fixed',
+            height: '1em',
+        }),
+        ImageAbsoluteDiv: styled.div({
             position: 'fixed',
             height: '1em',
         }),

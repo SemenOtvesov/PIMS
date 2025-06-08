@@ -4,13 +4,9 @@ import { userApi } from '@js/api/user/indexQuery';
 import useAppSelector from '@js/hooks/useAppSelector';
 
 // @ts-ignore: Unreachable code error
-import AbcoluteImg2 from '@maket/img/icon/absoluteImg/Nice work.png';
-// @ts-ignore: Unreachable code error
 import AbcoluteImg1 from '@maket/img/icon/absoluteImg/cat1.png';
 // @ts-ignore: Unreachable code error
 import AbcoluteImg4 from '@maket/img/icon/absoluteImg/cat2.png';
-// @ts-ignore: Unreachable code error
-import AbcoluteImg3 from '@maket/img/icon/absoluteImg/Heeyysexy.png';
 import style from './style';
 import Achievements from './achievements';
 
@@ -23,7 +19,16 @@ export default ({}: Tprops) => {
     // @ts-ignore: Unreachable code error
     const tg = window.Telegram.WebApp;
 
-    const { Container, BackCircle, ImageAbsolute, Avatar, UserName, Phone, AvatarBox } = style();
+    const {
+        Container,
+        BackCircle,
+        ImageAbsolute,
+        Avatar,
+        UserName,
+        Phone,
+        AvatarBox,
+        ImageAbsoluteDiv,
+    } = style();
 
     const userToken = useAppSelector(state => state.userState.token);
 
@@ -47,14 +52,15 @@ export default ({}: Tprops) => {
                         }
                     }}
                 />
-                <ImageAbsolute
+                <ImageAbsoluteDiv
                     style={{
                         top: '-20%',
                         left: '-20%',
                         height: '3em',
+                        fontSize: '3em',
                         position: 'absolute',
                     }}
-                    src={AbcoluteImg3}
+                    className="icon-Heeyysexy"
                 />
             </AvatarBox>
             <UserName>
@@ -78,12 +84,12 @@ export default ({}: Tprops) => {
                 <Achievements user={user.data} />
             </div>
 
-            <ImageAbsolute
+            <ImageAbsoluteDiv
                 style={{
                     bottom: '6em',
                     right: '1em',
                 }}
-                src={AbcoluteImg2}
+                className="icon-Nice-work"
             />
             <ImageAbsolute
                 style={{

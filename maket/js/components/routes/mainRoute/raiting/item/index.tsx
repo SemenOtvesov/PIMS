@@ -6,12 +6,14 @@ import { TlocationUser } from '@js/types/state/location';
 type Tprops = { item: TlocationUser; itemNum: number };
 
 export default ({ item, itemNum }: Tprops) => {
-    const { Container, TextBox, Title, Text, MainContent } = style();
+    const { Container, TextBox, Title, Text, MainContent, TitleNum } = style();
     return (
         <Container>
             <TextBox>
                 <Title>
-                    {itemNum}.{'  '}
+                    <TitleNum>
+                        {itemNum}.{'  '}
+                    </TitleNum>
                     {item.name}
                 </Title>
                 <Text
@@ -26,7 +28,7 @@ export default ({ item, itemNum }: Tprops) => {
                     }}
                     className="hide"
                 >
-                    Награды: {item.locationAwards.length == 0 ? 'Пока нет' : ''}{' '}
+                    Награды: {item.locationAwards.length == 0 ? 'пока нет' : ''}{' '}
                     {item.locationAwards?.map((el, i) =>
                         i == 0 ? el.awardTitle : ', ' + el.awardTitle,
                     )}

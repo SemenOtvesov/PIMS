@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'icomoon';
-    src: url('../fonts/icomoon.eot?6dqb5o');
+    src: url('../fonts/icomoon.eot?fijhyo');
     src:
-        url('../fonts/icomoon.eot?6dqb5o#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.ttf?6dqb5o') format('truetype'),
-        url('../fonts/icomoon.woff?6dqb5o') format('woff'),
-        url('../fonts/icomoon.svg?6dqb5o#icomoon') format('svg');
+        url('../fonts/icomoon.eot?fijhyo#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?fijhyo') format('truetype'),
+        url('../fonts/icomoon.woff?fijhyo') format('woff'),
+        url('../fonts/icomoon.svg?fijhyo#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -27,6 +27,34 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cat1:before {
+    content: '\e904';
+}
+.icon-cat2:before {
+    content: '\e907';
+}
+.icon-Heeyysexy:before {
+    content: '\e908';
+    color: #fff;
+}
+.icon-Nice-work:before {
+    content: '\e909';
+}
+.icon-Your-location-is-colored:before {
+    content: '\e90a';
+}
+.icon-Good-news:before {
+    content: '\e905';
+    color: #fff;
+}
+.icon-insider-news:before {
+    content: '\e906';
+    color: #fff;
+}
+.icon-whats-up-out-there:before {
+    content: '\e903';
+    color: #fff;
+}
 .icon-news:before {
     content: '\e900';
 }

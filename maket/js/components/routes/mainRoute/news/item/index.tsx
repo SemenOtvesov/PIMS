@@ -26,7 +26,7 @@ const monthsObj = {
 
 export default ({ item, full }: Tprops) => {
     const dispatch = useAppDispatch();
-    const { Container, Image, TextBox, Title, Text, MainContent } = style();
+    const { Container, Image, TextBox, Title, Text, MainContent, TextBoxFull } = style();
 
     const date = item.publishDate?.split('T')[0].split('-');
     return (
@@ -35,7 +35,20 @@ export default ({ item, full }: Tprops) => {
                 dispatch(setActiveNews(item));
             }}
         >
+            {full && (
+                <TextBoxFull>
+                    <Title style={{ fontSize: 25 }}>{item.title}</Title>
+                    <Text style={{ fontSize: 16, fontWeight: 700 }}>
+                        {`${date ? date[2] : ''} ${date ? monthsObj[date[1]] : ''} ${
+                            date ? date[0] : ''
+                        }` || 'Дата не указана'}
+                    </Text>
+                </TextBoxFull>
+            )}
             <Image
+                style={
+                    full ? { borderRadius: 0, boxShadow: '0 3px 3px 1px #00000030', zIndex: 1 } : {}
+                }
                 src={
                     item.images && item.images[0]
                         ? 'data:image/jpeg;base64,' + item.images[0]
@@ -43,13 +56,21 @@ export default ({ item, full }: Tprops) => {
                 }
             ></Image>
             <TextBox>
-                <Title>{item.title}</Title>
-                <Text>
-                    {`${date ? date[2] : ''} ${date ? monthsObj[date[1]] : ''} ${
-                        date ? date[0] : ''
-                    }` || 'Дата не указана'}
-                </Text>
-                {full && <MainContent>{item.content}</MainContent>}
+                {!full && (
+                    <>
+                        <Title>{item.title}</Title>
+                        <Text>
+                            {`${date ? date[2] : ''} ${date ? monthsObj[date[1]] : ''} ${
+                                date ? date[0] : ''
+                            }` || 'Дата не указана'}
+                        </Text>
+                    </>
+                )}
+                {full && (
+                    <MainContent style={{ fontSize: 16, fontWeight: 700 }}>
+                        {item.content}
+                    </MainContent>
+                )}
             </TextBox>
         </Container>
     );

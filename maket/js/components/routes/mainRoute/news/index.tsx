@@ -4,13 +4,6 @@ import Item from './item';
 import { userApi } from '@js/api/user/indexQuery';
 import useAppSelector from '@js/hooks/useAppSelector';
 
-// @ts-ignore: Unreachable code error
-import AbcoluteImg1 from '@maket/img/icon/absoluteImg/whats up out there__.png';
-// @ts-ignore: Unreachable code error
-import AbcoluteImg2 from '@maket/img/icon/absoluteImg/insider news.png';
-// @ts-ignore: Unreachable code error
-import AbcoluteImg3 from '@maket/img/icon/absoluteImg/Good news.png';
-
 type Tprops = {};
 
 export default ({}: Tprops) => {
@@ -29,10 +22,10 @@ export default ({}: Tprops) => {
             {activeNews ? (
                 <ImageAbsolute
                     style={{
-                        top: '6.25em',
+                        top: '5.5em',
                         left: '0.5em',
                     }}
-                    src={AbcoluteImg3}
+                    className="icon-Good-news"
                 />
             ) : (
                 <>
@@ -41,14 +34,14 @@ export default ({}: Tprops) => {
                             top: '0.5em',
                             left: '0.5em',
                         }}
-                        src={AbcoluteImg1}
+                        className="icon-whats-up-out-there"
                     />
                     <ImageAbsolute
                         style={{
                             top: '5.5em',
                             right: '0.5em',
                         }}
-                        src={AbcoluteImg2}
+                        className="icon-insider-news"
                     />
                 </>
             )}

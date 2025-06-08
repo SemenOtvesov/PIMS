@@ -43,6 +43,10 @@ export default () => {
             position: 'fixed',
             height: '1em',
         }),
+        ImageAbsoluteDiv: styled.div({
+            position: 'fixed',
+            height: '1em',
+        }),
         size,
     };
 };

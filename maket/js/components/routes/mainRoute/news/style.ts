@@ -39,7 +39,7 @@ export default () => {
             zIndex: 1,
             borderRadius: 10,
         }),
-        ImageAbsolute: styled.img({
+        ImageAbsolute: styled.div({
             position: 'fixed',
             height: '1em',
         }),

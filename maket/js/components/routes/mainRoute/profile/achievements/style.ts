@@ -17,6 +17,7 @@ export default () => {
             fontWeight: 800,
             textAlign: 'center',
             transform: 'scale(1, 0.857)',
+            letterSpacing: '-0.43px',
         }),
         Main: styled.div({ display: 'flex', gap: '5px', flexWrap: 'wrap' }),
         Achievement: styled.div({
@@ -50,7 +51,7 @@ export default () => {
         AchievementTitle: styled.div({
             fontSize: '1.35em',
             fontWeight: 700,
-
+            transform: 'scale(1, 0.857)',
             '&.number': {
                 fontSize: '1.75em',
             },
@@ -58,6 +59,7 @@ export default () => {
         AchievementText: styled.div({
             fontWeight: 600,
             fontSize: '1em',
+            transform: 'scale(1, 0.857)',
         }),
         size,
     };
