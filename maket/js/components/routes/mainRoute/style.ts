@@ -12,8 +12,13 @@ export default () => {
             position: 'sticky',
             top: '10vh',
             left: '0',
-            height: 'calc(90vh - (5em + 1vh))',
+            height: 'calc(100dvh - (5em + 100dvh))',
             width: '100vw',
+
+            minHeight: '100dvh',
+            maxHeight: '100dvh',
+
+            overflow: 'auto',
 
             display: 'flex',
             flexDirection: 'column',

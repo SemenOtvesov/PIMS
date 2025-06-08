@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useLayoutEffect, useRef } from 'react';
 import style from './style';
 
 import useAppSelector from '@js/hooks/useAppSelector';
@@ -33,6 +33,9 @@ export default memo(
                     profileRef.current?.classList.add('active');
                 }
             }, 300);
+            setTimeout(() => {
+                document.body.classList.remove('liteBlur');
+            }, 300);
         });
 
         return (
@@ -40,8 +43,11 @@ export default memo(
                 <Item
                     ref={newsRef}
                     onClick={() => {
-                        dispatch(setSection('news'));
-                        dispatch(setActiveNews(null));
+                        document.body.classList.add('liteBlur');
+                        setTimeout(() => {
+                            dispatch(setSection('news'));
+                            dispatch(setActiveNews(null));
+                        }, 300);
                     }}
                 >
                     <IconBox>
@@ -52,7 +58,10 @@ export default memo(
                 <Item
                     ref={raitingRef}
                     onClick={() => {
-                        dispatch(setSection('raiting'));
+                        document.body.classList.add('liteBlur');
+                        setTimeout(() => {
+                            dispatch(setSection('raiting'));
+                        }, 300);
                     }}
                 >
                     <IconBox>
@@ -63,7 +72,10 @@ export default memo(
                 <Item
                     ref={profileRef}
                     onClick={() => {
-                        dispatch(setSection('profile'));
+                        document.body.classList.add('liteBlur');
+                        setTimeout(() => {
+                            dispatch(setSection('profile'));
+                        }, 300);
                     }}
                 >
                     <IconBox>

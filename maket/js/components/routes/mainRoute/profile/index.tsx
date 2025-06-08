@@ -54,7 +54,7 @@ export default ({}: Tprops) => {
                 />
                 <ImageAbsoluteDiv
                     style={{
-                        top: '-20%',
+                        top: '-25%',
                         left: '-20%',
                         height: '3em',
                         fontSize: '3em',

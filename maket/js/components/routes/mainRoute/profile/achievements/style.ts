@@ -11,12 +11,14 @@ export default () => {
             gap: '2em',
             zIndex: '1',
             width: '100%',
+
+            minWidth: 'calc(100vw - 2em)',
         }),
         Title: styled.div({
-            fontSize: '1.5em',
-            fontWeight: 800,
+            fontSize: '28px',
+            fontWeight: 700,
             textAlign: 'center',
-            transform: 'scale(1, 0.857)',
+            transform: 'scale(1, 0.92)',
             letterSpacing: '-0.43px',
         }),
         Main: styled.div({ display: 'flex', gap: '5px', flexWrap: 'wrap' }),
@@ -49,17 +51,18 @@ export default () => {
             },
         }),
         AchievementTitle: styled.div({
-            fontSize: '1.35em',
+            fontSize: '20px',
             fontWeight: 700,
-            transform: 'scale(1, 0.857)',
+            transform: 'scale(1, 1)',
             '&.number': {
-                fontSize: '1.75em',
+                fontSize: '32px',
+                transform: 'scale(1, 1)',
             },
         }),
         AchievementText: styled.div({
             fontWeight: 600,
-            fontSize: '1em',
-            transform: 'scale(1, 0.857)',
+            fontSize: '14px',
+            transform: 'scale(1, 1)',
         }),
         size,
     };

@@ -11,6 +11,7 @@ export default () => {
             gap: '2.5em',
             maxHeight: 'calc(100vh - 80px)',
             position: 'relative',
+            paddingBottom: '5em',
         }),
         BackCircle: styled.div({
             position: 'absolute',
@@ -36,6 +37,7 @@ export default () => {
             flexDirection: 'column',
             gap: '5px',
             overflow: 'auto',
+
             zIndex: 1,
             borderRadius: 10,
         }),

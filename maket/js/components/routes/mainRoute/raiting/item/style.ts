@@ -16,13 +16,24 @@ export default () => {
             gap: '0.25em',
             padding: '0.5em 1em',
         }),
-        TitleNum: styled.span({ fontSize: '1.25em', fontWeight: 600, letterSpacing: '0.43px' }),
-        Title: styled.div({ fontSize: '1.25em', fontWeight: 600, letterSpacing: '-0.43px' }),
+        TitleNum: styled.span({
+            fontSize: '20px',
+            transform: 'scale(1, 0.85)',
+            fontWeight: 600,
+            letterSpacing: '0.43px',
+        }),
+        Title: styled.div({
+            fontSize: '20px',
+            transform: 'scale(1, 0.85)',
+            fontWeight: 600,
+            letterSpacing: '-0.43px',
+        }),
         Text: styled.div({
             fontSize: '13px',
             letterSpacing: '-0.43px',
             transition: '0.3s',
-            fontWeight: 700,
+            fontWeight: 600,
+            transform: 'scale(1, 1.07)',
             '&.hide': {
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',

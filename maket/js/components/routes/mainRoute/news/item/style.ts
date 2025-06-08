@@ -37,11 +37,16 @@ export default () => {
         }),
         Title: styled.div({
             fontSize: '20px',
-            transform: 'scale(1, 0.9)',
+            transform: 'scale(1, 0.95)',
             fontWeight: 700,
             letterSpacing: '-0.43px',
         }),
-        Text: styled.div({ fontSize: '14px', fontWeight: 600, letterSpacing: '-0.43px' }),
+        Text: styled.div({
+            fontSize: '14px',
+            fontWeight: 600,
+            letterSpacing: '-0.43px',
+            transform: 'scale(1, 0.95)',
+        }),
         MainContent: styled.div({ fontSize: '14px', fontWeight: 600, letterSpacing: '-0.43px' }),
         size,
     };

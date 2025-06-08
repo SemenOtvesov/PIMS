@@ -38,7 +38,12 @@ export default () => {
         }),
         IconBox: styled.div({}),
         Icon: styled.div({ fontSize: '2.5em', color: 'inherit' }),
-        ItemText: styled.div({ fontWeight: 600, fontSize: '0.875rem', color: 'inherit' }),
+        ItemText: styled.div({
+            fontWeight: 700,
+            fontSize: '14px',
+            color: 'inherit',
+            letterSpacing: '-0.43px',
+        }),
         size,
     };
 };
