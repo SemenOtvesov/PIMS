@@ -7,7 +7,16 @@ import useAppSelector from '@js/hooks/useAppSelector';
 type Tprops = {};
 
 export default ({}: Tprops) => {
-    const { Container, Title, Main, BackCircle, ImageAbsolute } = style();
+    const {
+        Container,
+        Title,
+        Main,
+        BackCircle,
+        BackCircleMain,
+        BackCircleYellow,
+        BackCircleGray,
+        ImageAbsolute,
+    } = style();
 
     const userToken = useAppSelector(state => state.userState.token);
     const newsList = userApi.useGetNewsQuery(userToken);
@@ -17,7 +26,12 @@ export default ({}: Tprops) => {
     return (
         <Container>
             <Title>PIMS News</Title>
-            <BackCircle />
+            <BackCircle>
+                <BackCircleMain>
+                    <BackCircleYellow />
+                    <BackCircleGray />
+                </BackCircleMain>
+            </BackCircle>
 
             {activeNews ? (
                 <ImageAbsolute

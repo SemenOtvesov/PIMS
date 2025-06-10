@@ -22,6 +22,9 @@ export default ({}: Tprops) => {
     const {
         Container,
         BackCircle,
+        BackCircleMain,
+        BackCircleYellow,
+        BackCircleGray,
         ImageAbsolute,
         Avatar,
         UserName,
@@ -40,7 +43,12 @@ export default ({}: Tprops) => {
 
     return (
         <Container>
-            <BackCircle />
+            <BackCircle>
+                <BackCircleMain>
+                    <BackCircleYellow />
+                    <BackCircleGray />
+                </BackCircleMain>
+            </BackCircle>
 
             <AvatarBox>
                 <Avatar
@@ -71,6 +79,7 @@ export default ({}: Tprops) => {
             <div
                 style={{
                     position: 'relative',
+                    zIndex: 10,
                 }}
             >
                 <ImageAbsolute
@@ -81,14 +90,6 @@ export default ({}: Tprops) => {
                         position: 'absolute',
                     }}
                     src={AbcoluteImg4}
-                />
-                <ImageAbsoluteDiv
-                    style={{
-                        bottom: '0.5em',
-                        right: '1em',
-                        position: 'absolute',
-                    }}
-                    className="icon-Nice-work"
                 />
 
                 <Achievements user={user.data} />
@@ -102,6 +103,13 @@ export default ({}: Tprops) => {
                     position: 'absolute',
                 }}
                 src={AbcoluteImg1}
+            />
+            <ImageAbsoluteDiv
+                style={{
+                    bottom: '6em',
+                    right: '1em',
+                }}
+                className="icon-Nice-work"
             />
         </Container>
     );

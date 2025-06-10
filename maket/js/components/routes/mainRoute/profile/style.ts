@@ -5,7 +5,7 @@ export default () => {
     const size = useWindowSizeCheck();
     return {
         Container: styled.div({
-            padding: '3.5em 1em 5px',
+            padding: '3.5em 0 5px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -15,20 +15,48 @@ export default () => {
             maxHeight: 'calc(100vh - 80px)',
             position: 'relative',
 
-            overflow: 'auto',
+            overflowY: 'auto',
+            overflowX: 'hidden',
         }),
         AvatarBox: styled.div({ position: 'relative' }),
         BackCircle: styled.div({
             position: 'absolute',
-            width: '150%',
-            aspectRatio: 1 / 1,
-            top: '0',
+            width: '115.5vw',
+            height: '43.5vh',
+            top: '6vh',
             left: '50%',
-            transform: 'translate(-50%, 10%)',
-            borderRadius: '50%',
-            filter: 'blur(50px)',
-            backgroundColor: '#FFF2D395',
+            transform: 'translate(-50%, 0)',
+
             zIndex: 0,
+        }),
+        BackCircleMain: styled.div({
+            width: '100%',
+            height: '100%',
+            position: 'relative',
+        }),
+        BackCircleYellow: styled.div({
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translate(-50%, 0)',
+
+            width: '100%',
+            height: '90%',
+            backgroundColor: '#FFF2D3',
+            filter: 'blur(100px)',
+            borderRadius: '50%',
+        }),
+        BackCircleGray: styled.div({
+            position: 'absolute',
+            bottom: '0',
+            left: '50%',
+            transform: 'translate(-50%, 0)',
+
+            width: '60%',
+            height: '47%',
+            backgroundColor: '#FFD08A',
+            filter: 'blur(300px)',
+            borderRadius: '50%',
         }),
         Avatar: styled.img({
             width: '30vw',

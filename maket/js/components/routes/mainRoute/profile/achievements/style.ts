@@ -21,16 +21,41 @@ export default () => {
             transform: 'scale(1, 1)',
             letterSpacing: '-0.43px',
         }),
-        Main: styled.div({ display: 'flex', gap: '5px', flexWrap: 'wrap' }),
+        Main: styled.div({
+            display: 'grid',
+            gridTemplateRows: 'repeat(2, calc((100vw - 50px) / 3))',
+            gridAutoColumns: 'calc((100vw - 50px) / 3)',
+            gridAutoFlow: 'column',
+            gap: '5px',
+
+            // Горизонтальная прокрутка
+            overflowX: 'auto',
+            overflowY: 'hidden',
+
+            // Защита для теней (подбирайте padding под размер ваших теней)
+            padding: '50px',
+            margin: '-50px',
+
+            // Скрытие скроллбара (опционально)
+            scrollbarWidth: 'none',
+            '&::-webkit-scrollbar': {
+                display: 'none',
+            },
+
+            // Фиксируем ширину
+            width: 'calc(100vw + 50px)',
+            boxSizing: 'border-box',
+        }),
         Achievement: styled.div({
-            width: 'calc((100% - 10px) / 3)',
+            width: 'calc((100vw - 50px) / 3)',
+            minWidth: 'calc((100vw - 50px) / 3)',
             aspectRatio: 1,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             padding: '1em',
 
-            boxShadow: '0 2px 2px 0 #00000025',
+            boxShadow: '0 14px 50px 0 #42424220',
 
             borderRadius: 10,
 
@@ -47,7 +72,8 @@ export default () => {
                 backgroundColor: '#FFE4D3',
             },
             '&.type5': {
-                backgroundColor: '#FCB9A7',
+                background:
+                    'linear-gradient(180deg,rgba(252, 185, 167, 1) 50%, rgba(252, 185, 167, 1) 50%)',
             },
         }),
         AchievementTitle: styled.div({

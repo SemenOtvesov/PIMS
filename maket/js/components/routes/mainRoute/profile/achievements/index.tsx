@@ -32,7 +32,7 @@ export default ({ user }: { user: TuserUser | undefined }) => {
 function numberText(num: number) {
     let retVal = 1;
     if ([0].includes(num % 6)) {
-        retVal = 3;
+        retVal = 1;
     }
     if ([1].includes(num % 6)) {
         retVal = 1;
@@ -41,20 +41,20 @@ function numberText(num: number) {
         retVal = 2;
     }
     if ([3].includes(num % 6)) {
-        retVal = 4;
+        retVal = 2;
     }
 
     if ([4].includes(num % 6)) {
         retVal = 5;
     }
     if ([5].includes(num % 6)) {
-        retVal = 6;
+        retVal = 3;
     }
     if ([6].includes(num % 6)) {
-        retVal = 7;
+        retVal = 3;
     }
     if ([7].includes(num % 6)) {
-        retVal = 8;
+        retVal = 2;
     }
 
     return retVal;

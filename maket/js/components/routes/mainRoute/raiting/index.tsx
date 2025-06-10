@@ -12,7 +12,17 @@ import AbcoluteImg4 from '@maket/img/icon/absoluteImg/cat2.png';
 type Tprops = {};
 
 export default ({}: Tprops) => {
-    const { Container, Title, Main, BackCircle, ImageAbsolute, ImageAbsoluteDiv } = style();
+    const {
+        Container,
+        Title,
+        Main,
+        BackCircle,
+        BackCircleMain,
+        BackCircleYellow,
+        BackCircleGray,
+        ImageAbsolute,
+        ImageAbsoluteDiv,
+    } = style();
 
     const userToken = useAppSelector(state => state.userState.token);
     const newsList = userApi.useGetLocationQuery(userToken);
@@ -20,7 +30,12 @@ export default ({}: Tprops) => {
     return (
         <Container>
             <Title>Locations Rating</Title>
-            <BackCircle />
+            <BackCircle>
+                <BackCircleMain>
+                    <BackCircleYellow />
+                    <BackCircleGray />
+                </BackCircleMain>
+            </BackCircle>
 
             <ImageAbsoluteDiv
                 style={{
