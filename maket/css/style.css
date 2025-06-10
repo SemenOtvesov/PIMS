@@ -30,6 +30,8 @@ aside {
 
 html,
 body {
+  overscroll-behavior: none;
+  overflow: hidden;
   height: 100%;
   width: 100%;
   font-size: 100%;
@@ -210,6 +212,9 @@ body {
 }
 body.liteBlur {
   opacity: 0;
+}
+body.notPointer {
+  pointer-events: none;
 }
 
 button,

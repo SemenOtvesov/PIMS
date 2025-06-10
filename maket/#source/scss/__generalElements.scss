@@ -34,6 +34,9 @@ body {
     &.liteBlur {
         opacity: 0;
     }
+    &.notPointer {
+        pointer-events: none;
+    }
 }
 button,
 .button {

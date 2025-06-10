@@ -5,7 +5,7 @@ import { TuserUser } from '@js/types/state/users';
 export default ({ user }: { user: TuserUser | undefined }) => {
     const { Container, Title, Main, Achievement, AchievementTitle, AchievementText } = style();
 
-    const styleList = user?.employeeAwards.map(el => getWeightedRandom());
+    const styleList = user?.employeeAwards.map((el, i) => numberText(i + 1));
 
     return (
         <Container>
@@ -29,8 +29,33 @@ export default ({ user }: { user: TuserUser | undefined }) => {
     );
 };
 
-function getWeightedRandom() {
-    const numbers = [1, 1, 1, 2, 2, 3, 4, 5]; // 1 и 2 встречаются в 3 раза чаще
-    const randomIndex = Math.floor(Math.random() * numbers.length);
-    return numbers[randomIndex];
+function numberText(num: number) {
+    let retVal = 1;
+    if ([0].includes(num % 6)) {
+        retVal = 3;
+    }
+    if ([1].includes(num % 6)) {
+        retVal = 1;
+    }
+    if ([2].includes(num % 6)) {
+        retVal = 2;
+    }
+    if ([3].includes(num % 6)) {
+        retVal = 4;
+    }
+
+    if ([4].includes(num % 6)) {
+        retVal = 5;
+    }
+    if ([5].includes(num % 6)) {
+        retVal = 6;
+    }
+    if ([6].includes(num % 6)) {
+        retVal = 7;
+    }
+    if ([7].includes(num % 6)) {
+        retVal = 8;
+    }
+
+    return retVal;
 }

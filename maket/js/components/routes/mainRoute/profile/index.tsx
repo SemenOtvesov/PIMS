@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { userApi } from '@js/api/user/indexQuery';
 import useAppSelector from '@js/hooks/useAppSelector';
@@ -52,6 +52,7 @@ export default ({}: Tprops) => {
                         }
                     }}
                 />
+
                 <ImageAbsoluteDiv
                     style={{
                         top: '-25%',
@@ -66,7 +67,7 @@ export default ({}: Tprops) => {
             <UserName>
                 {tg.initDataUnsafe.user.first_name} {tg.initDataUnsafe.user.last_name}
             </UserName>
-            <Phone>Не указан</Phone>
+            <Phone>+7999 999 99 99</Phone>
             <div
                 style={{
                     position: 'relative',
@@ -81,21 +82,24 @@ export default ({}: Tprops) => {
                     }}
                     src={AbcoluteImg4}
                 />
+                <ImageAbsoluteDiv
+                    style={{
+                        bottom: '0.5em',
+                        right: '1em',
+                        position: 'absolute',
+                    }}
+                    className="icon-Nice-work"
+                />
+
                 <Achievements user={user.data} />
             </div>
 
-            <ImageAbsoluteDiv
-                style={{
-                    bottom: '6em',
-                    right: '1em',
-                }}
-                className="icon-Nice-work"
-            />
             <ImageAbsolute
                 style={{
                     top: '0em',
                     right: '0',
                     height: '10em',
+                    position: 'absolute',
                 }}
                 src={AbcoluteImg1}
             />

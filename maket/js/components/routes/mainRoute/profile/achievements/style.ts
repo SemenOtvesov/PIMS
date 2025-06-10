@@ -9,7 +9,7 @@ export default () => {
             display: 'flex',
             flexDirection: 'column',
             gap: '2em',
-            zIndex: '1',
+            zIndex: '2',
             width: '100%',
 
             minWidth: 'calc(100vw - 2em)',
@@ -18,7 +18,7 @@ export default () => {
             fontSize: '28px',
             fontWeight: 700,
             textAlign: 'center',
-            transform: 'scale(1, 0.92)',
+            transform: 'scale(1, 1)',
             letterSpacing: '-0.43px',
         }),
         Main: styled.div({ display: 'flex', gap: '5px', flexWrap: 'wrap' }),
@@ -30,7 +30,7 @@ export default () => {
             justifyContent: 'space-between',
             padding: '1em',
 
-            boxShadow: '0 0 10px 1px #00000010',
+            boxShadow: '0 2px 2px 0 #00000025',
 
             borderRadius: 10,
 
@@ -63,6 +63,7 @@ export default () => {
             fontWeight: 600,
             fontSize: '14px',
             transform: 'scale(1, 1)',
+            letterSpacing: 0,
         }),
         size,
     };

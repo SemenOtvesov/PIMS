@@ -14,7 +14,9 @@ export default () => {
             display: 'flex',
             flexDirection: 'column',
             gap: '0.25em',
-            padding: '0.5em 1em',
+            padding: '0.6em 1em',
+            minHeight: '49px',
+            height: 'fit-content',
         }),
         TitleNum: styled.span({
             fontSize: '20px',

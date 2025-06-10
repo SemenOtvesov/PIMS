@@ -1,9 +1,11 @@
-import React, { memo, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import style from './style';
 
 import useAppSelector from '@js/hooks/useAppSelector';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 import { setActiveNews, setSection } from '@js/state/activeSection/activeSectionState';
+
+let checkRender = false;
 
 export default memo(
     () => {
@@ -34,7 +36,11 @@ export default memo(
                 }
             }, 300);
             setTimeout(() => {
+                checkRender = false;
                 document.body.classList.remove('liteBlur');
+                setTimeout(() => {
+                    document.body.classList.remove('notPointer');
+                }, 150);
             }, 300);
         });
 
@@ -43,10 +49,17 @@ export default memo(
                 <Item
                     ref={newsRef}
                     onClick={() => {
+                        checkRender = true;
+                        document.body.classList.add('notPointer');
                         document.body.classList.add('liteBlur');
+
                         setTimeout(() => {
                             dispatch(setSection('news'));
                             dispatch(setActiveNews(null));
+
+                            setTimeout(() => {
+                                clear();
+                            }, 500);
                         }, 300);
                     }}
                 >
@@ -58,9 +71,14 @@ export default memo(
                 <Item
                     ref={raitingRef}
                     onClick={() => {
+                        checkRender = true;
+                        document.body.classList.add('notPointer');
                         document.body.classList.add('liteBlur');
                         setTimeout(() => {
                             dispatch(setSection('raiting'));
+                            setTimeout(() => {
+                                clear();
+                            }, 500);
                         }, 300);
                     }}
                 >
@@ -72,9 +90,14 @@ export default memo(
                 <Item
                     ref={profileRef}
                     onClick={() => {
+                        checkRender = true;
+                        document.body.classList.add('notPointer');
                         document.body.classList.add('liteBlur');
                         setTimeout(() => {
                             dispatch(setSection('profile'));
+                            setTimeout(() => {
+                                clear();
+                            }, 500);
                         }, 300);
                     }}
                 >
@@ -88,3 +111,13 @@ export default memo(
     },
     () => true,
 );
+
+function clear() {
+    if (checkRender) {
+        checkRender = false;
+        document.body.classList.remove('liteBlur');
+        setTimeout(() => {
+            document.body.classList.remove('notPointer');
+        }, 150);
+    }
+}
