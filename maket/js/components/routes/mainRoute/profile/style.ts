@@ -17,6 +17,8 @@ export default () => {
 
             overflowY: 'auto',
             overflowX: 'hidden',
+
+            overscrollBehavior: 'contain',
         }),
         AvatarBox: styled.div({ position: 'relative' }),
         BackCircle: styled.div({

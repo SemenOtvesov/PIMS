@@ -31,12 +31,14 @@ aside {
 html,
 body {
     overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
     overflow-x: hidden; /* Блокируем горизонтальный скролл */
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
     max-width: 100vw; /* Ограничиваем ширину */
+    position: fixed;
 
     font-size: 100%;
     line-height: 1;

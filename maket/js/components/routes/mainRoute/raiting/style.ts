@@ -12,6 +12,8 @@ export default () => {
             maxHeight: 'calc(100vh - 80px)',
             position: 'relative',
             paddingBottom: '5em',
+
+            overscrollBehavior: 'contain',
         }),
         BackCircle: styled.div({
             position: 'absolute',

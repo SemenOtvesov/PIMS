@@ -15,7 +15,7 @@ export default () => {
             flexDirection: 'column',
             gap: '6px',
             padding: '12px 23px 8px 23px',
-            minHeight: '49px',
+            minHeight: '56.5px',
             height: 'fit-content',
         }),
         TitleNum: styled.span({

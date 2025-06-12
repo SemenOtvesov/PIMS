@@ -88,8 +88,9 @@ export default () => {
         AchievementText: styled.div({
             fontWeight: 600,
             fontSize: '14px',
-            transform: 'scale(1, 1)',
-            letterSpacing: 0,
+            transform: 'scale(1.1, 1)',
+            letterSpacing: '0.025px',
+            lineHeight: '1em',
         }),
         size,
     };

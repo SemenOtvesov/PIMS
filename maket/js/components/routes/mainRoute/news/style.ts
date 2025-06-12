@@ -11,6 +11,8 @@ export default () => {
             gap: '36px',
             maxHeight: 'calc(100vh - 80px)',
             position: 'relative',
+
+            overscrollBehavior: 'contain',
         }),
         BackCircle: styled.div({
             position: 'absolute',
