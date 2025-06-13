@@ -13,10 +13,9 @@ export default () => {
             background: '#fff',
             display: 'flex',
             flexDirection: 'column',
+            flex: '1 1',
             gap: '6px',
             padding: '12px 23px 8px 23px',
-            minHeight: '56.5px',
-            height: 'fit-content',
         }),
         TitleNum: styled.span({
             fontSize: '20px',
