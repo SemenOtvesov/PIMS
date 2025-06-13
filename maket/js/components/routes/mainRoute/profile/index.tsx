@@ -42,7 +42,7 @@ export default ({}: Tprops) => {
     });
 
     return (
-        <Container>
+        <Container className="allow-scroll">
             <BackCircle>
                 <BackCircleMain>
                     <BackCircleYellow />

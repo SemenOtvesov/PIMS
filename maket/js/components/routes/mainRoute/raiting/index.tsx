@@ -28,7 +28,7 @@ export default ({}: Tprops) => {
     const newsList = userApi.useGetLocationQuery(userToken);
 
     return (
-        <Container>
+        <Container className="allow-scroll">
             <Title>Locations Rating</Title>
             <BackCircle>
                 <BackCircleMain>

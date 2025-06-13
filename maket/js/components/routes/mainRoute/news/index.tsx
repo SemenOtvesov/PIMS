@@ -24,7 +24,7 @@ export default ({}: Tprops) => {
     const activeNews = useAppSelector(state => state.activeSectionState.activeNews);
 
     return (
-        <Container>
+        <Container className="allow-scroll">
             <Title>PIMS News</Title>
             <BackCircle>
                 <BackCircleMain>

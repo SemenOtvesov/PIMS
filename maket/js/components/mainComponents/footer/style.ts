@@ -21,6 +21,7 @@ export default () => {
             WebkitTapHighlightColor: 'transparent',
 
             boxShadow: '0 0 5px 1px #00000010',
+            zIndex: '100',
         }),
         Item: styled.div({
             display: 'flex',

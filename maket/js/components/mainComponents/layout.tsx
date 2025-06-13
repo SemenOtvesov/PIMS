@@ -14,6 +14,23 @@ export const LayoutContext = createContext<TlayoutContext>({});
 export default () => {
     const { pathname } = useLocation();
 
+    useEffect(() => {
+        const fn = function (e) {
+            const isScrollable = e.target.closest('.allow-scroll'); // Ищем ближайший разрешённый элемент
+            const atTop = window.scrollY <= 0;
+            const atBottom = window.scrollY >= document.body.scrollHeight - window.innerHeight;
+
+            // Если скроллим не внутри разрешённого контейнера и достигли границы — блокируем
+            if (!isScrollable && (atTop || atBottom)) {
+                e.preventDefault();
+            }
+        };
+        document.addEventListener('touchmove', fn, { passive: false });
+        return () => {
+            document.removeEventListener('touchmove', fn);
+        };
+    });
+
     if (pathname.includes('admin')) {
         useAdminToken();
     }
