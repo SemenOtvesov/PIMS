@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './style';
 
 import { TlocationUser } from '@js/types/state/location';
@@ -7,9 +7,16 @@ type Tprops = { item: TlocationUser; itemNum: number };
 
 export default ({ item, itemNum }: Tprops) => {
     const { Container, TextBox, Title, Text, MainContent, TitleNum } = style();
+
+    useEffect(() => {
+        const items = document.querySelectorAll('[data-raiting-item]');
+        items.forEach(el => {
+            el.setAttribute('style', `height: ${el.scrollHeight}px`);
+        });
+    });
     return (
-        <Container>
-            <TextBox>
+        <Container data-raiting-item>
+            <TextBox data-raiting-item>
                 <Title>
                     <TitleNum>
                         {itemNum}.{'  '}

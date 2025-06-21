@@ -7,7 +7,6 @@ export default () => {
         Container: styled.div({
             borderRadius: '10px',
             overflow: 'hidden',
-            minHeight: 'fit-content',
         }),
         TextBox: styled.div({
             background: '#fff',
