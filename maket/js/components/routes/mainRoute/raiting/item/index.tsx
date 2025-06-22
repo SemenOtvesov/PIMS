@@ -11,7 +11,10 @@ export default ({ item, itemNum }: Tprops) => {
     useEffect(() => {
         const items = document.querySelectorAll('[data-raiting-item]');
         items.forEach(el => {
-            el.setAttribute('style', `height: ${el.scrollHeight}px`);
+            el.setAttribute(
+                'style',
+                `height: ${el.scrollHeight}px; min-height: ${el.scrollHeight}px ; max-height: ${el.scrollHeight}px`,
+            );
         });
     });
     return (
