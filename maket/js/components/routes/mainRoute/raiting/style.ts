@@ -62,10 +62,13 @@ export default () => {
             transform: 'scale(1, 0.857)',
         }),
         Main: styled.div({
+            position: 'relative',
             display: 'flex',
             flexDirection: 'column',
             gap: '5px',
             overflow: 'auto',
+            minHeight: 'calc(100vh - 80px - 8em );',
+            height: 'calc(100vh - 80px - 8em );',
 
             zIndex: 1,
             borderRadius: 10,

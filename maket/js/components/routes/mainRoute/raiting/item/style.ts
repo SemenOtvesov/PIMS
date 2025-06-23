@@ -14,7 +14,7 @@ export default () => {
             flexDirection: 'column',
             flex: '1 1',
             gap: '6px',
-            padding: '12px 23px 8px 23px',
+            padding: '10px 20px 8px',
         }),
         TitleNum: styled.span({
             fontSize: '20px',

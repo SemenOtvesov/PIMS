@@ -37,14 +37,6 @@ export default ({}: Tprops) => {
                 </BackCircleMain>
             </BackCircle>
 
-            <ImageAbsoluteDiv
-                style={{
-                    bottom: '8em',
-                    left: '50%',
-                    transform: 'translate(-50%)',
-                }}
-                className="icon-Your-location-is-colored"
-            />
             <ImageAbsolute
                 style={{
                     top: '0em',
@@ -64,6 +56,26 @@ export default ({}: Tprops) => {
 
             <Main>
                 {newsList.data?.content.map((el, i) => <Item key={i} item={el} itemNum={i + 1} />)}
+                <div
+                    style={{
+                        flex: '1 1',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'end',
+                        alignItems: 'center',
+                    }}
+                >
+                    <ImageAbsoluteDiv
+                        style={{
+                            position: 'relative',
+
+                            minHeight: '1.25em',
+                            fontSize: '1.25em',
+                            marginTop: '1em',
+                        }}
+                        className="icon-Your-location-is-colored"
+                    />
+                </div>
             </Main>
         </Container>
     );
