@@ -45,7 +45,7 @@ export default () => {
             fontSize: '14px',
             fontWeight: 600,
             letterSpacing: '-0.43px',
-            transform: 'scale(1, 0.95)',
+            transform: 'scale(1, 0.9)',
         }),
         MainContent: styled.div({ fontSize: '14px', fontWeight: 600, letterSpacing: '-0.43px' }),
         size,

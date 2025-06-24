@@ -24,12 +24,12 @@ export default () => {
         }),
         Title: styled.div({
             fontSize: '20px',
-            transform: 'scale(1, 0.85)',
+            transform: 'scale(1, 0.9)',
             fontWeight: 600,
             letterSpacing: '-0.43px',
         }),
         Text: styled.div({
-            fontSize: '13px',
+            fontSize: '16px',
             letterSpacing: '-0.43px',
             transition: '0.3s',
             fontWeight: 600,
