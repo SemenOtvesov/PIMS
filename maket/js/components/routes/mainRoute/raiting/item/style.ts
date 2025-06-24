@@ -13,7 +13,7 @@ export default () => {
             display: 'flex',
             flexDirection: 'column',
             flex: '1 1',
-            gap: '6px',
+            gap: '4px',
             padding: '10px 20px 8px',
         }),
         TitleNum: styled.span({
@@ -33,7 +33,7 @@ export default () => {
             letterSpacing: '-0.43px',
             transition: '0.3s',
             fontWeight: 600,
-            transform: 'scale(1, 1.07)',
+            transform: 'scale(1, 0.85)',
             '&.hide': {
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
