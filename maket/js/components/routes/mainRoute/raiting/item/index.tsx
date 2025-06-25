@@ -9,13 +9,7 @@ export default ({ item, itemNum }: Tprops) => {
     const { Container, TextBox, Title, Text, MainContent, TitleNum } = style();
 
     useEffect(() => {
-        const items = document.querySelectorAll('[data-raiting-item]');
-        items.forEach(el => {
-            el.setAttribute(
-                'style',
-                `height: ${el.scrollHeight}px; min-height: ${el.scrollHeight}px ; max-height: ${el.scrollHeight}px`,
-            );
-        });
+        calcSize();
     });
     return (
         <Container data-raiting-item>
@@ -27,13 +21,18 @@ export default ({ item, itemNum }: Tprops) => {
                     {item.name}
                 </Title>
                 <Text
+                    id="textBlock"
                     onClick={(e: any) => {
                         if (e.target.className.includes('hide')) {
                             e.target.classList.add('open');
                             e.target.classList.remove('hide');
+                            calcSize();
                         } else {
                             e.target.classList.remove('open');
                             e.target.classList.add('hide');
+                            setTimeout(() => {
+                                calcSize();
+                            }, 300);
                         }
                     }}
                     className="hide"
@@ -47,3 +46,16 @@ export default ({ item, itemNum }: Tprops) => {
         </Container>
     );
 };
+
+function calcSize() {
+    const items = document.querySelectorAll('[data-raiting-item]');
+    items.forEach(el => {
+        const textBlock = el.querySelector('#textBlock');
+
+        const height = (textBlock?.scrollHeight || 0) + 36;
+        el.setAttribute(
+            'style',
+            `height: ${height}px; min-height: ${height}px ; max-height: ${height}px`,
+        );
+    });
+}

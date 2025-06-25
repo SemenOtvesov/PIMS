@@ -53,7 +53,7 @@ export default () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            padding: '1em',
+            padding: '10px',
 
             boxShadow: '0 14px 50px 0 #42424220',
 

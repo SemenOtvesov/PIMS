@@ -83,7 +83,7 @@ export default memo(
                     }}
                 >
                     <IconBox>
-                        <Icon className="icon-profile"></Icon>
+                        <Icon className="icon-raiting"></Icon>
                     </IconBox>
                     <ItemText>Рейтинг</ItemText>
                 </Item>
@@ -102,7 +102,7 @@ export default memo(
                     }}
                 >
                     <IconBox>
-                        <Icon className="icon-raiting"></Icon>
+                        <Icon className="icon-profile"></Icon>
                     </IconBox>
                     <ItemText>Профиль</ItemText>
                 </Item>

@@ -40,7 +40,7 @@ export default () => {
                 textOverflow: 'ellipsis',
                 height: '1em',
             },
-            '&.open': { height: 'fit-content', minHeight: '1em' },
+            '&.open': { height: 'inherit', minHeight: '1em' },
         }),
         MainContent: styled.div({ fontSize: '0.875em' }),
         size,
