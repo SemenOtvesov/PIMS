@@ -10,6 +10,9 @@ export default ({ user }: { user: TuserUser | undefined }) => {
     return (
         <Container>
             <Title>Your achievements</Title>
+            {user?.employeeAwards.length == 0 && (
+                <div style={{ textAlign: 'center', width: '100%' }}>Пока что здесь пусто</div>
+            )}
             <Main>
                 {user?.employeeAwards?.map((el, i) => (
                     <Achievement className={`type${styleList[i]}`}>
@@ -21,9 +24,6 @@ export default ({ user }: { user: TuserUser | undefined }) => {
                         <AchievementText>{el.awardDescription}</AchievementText>
                     </Achievement>
                 ))}
-                {user?.employeeAwards.length == 0 && (
-                    <div style={{ textAlign: 'center', width: '100%' }}>Пока что здесь пусто</div>
-                )}
             </Main>
         </Container>
     );

@@ -33,12 +33,11 @@ export default () => {
             letterSpacing: '-0.43px',
             transition: '0.3s',
             fontWeight: 600,
-            transform: 'scale(1, 0.85)',
+            transform: 'scale(1, 0.78)',
             '&.hide': {
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
-                height: '1em',
             },
             '&.open': { height: 'inherit', minHeight: '1em' },
         }),
