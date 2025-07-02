@@ -23,6 +23,13 @@ import useAppDispatch from '@js/hooks/useAppDispatch';
 import addLocationAward from '@js/api/admin/addLocationAward';
 import useAppSelector from '@js/hooks/useAppSelector';
 import adduserAward from '@js/api/admin/adduserAward';
+import deleteLocations from '@js/api/admin/delete/deleteLocations';
+import addLocations from '@js/api/admin/addLocations';
+import deleteUser from '@js/api/admin/delete/deleteUser';
+import deleteAward from '@js/api/admin/delete/deleteAward';
+import deleteNews from '@js/api/admin/delete/deleteNews';
+import { TreqLocation } from '@js/types/state/location';
+import setLocationUser from '@js/api/admin/setLocationUser';
 
 export default ({
     content,
@@ -32,15 +39,28 @@ export default ({
     initChip,
     confirmButton,
     list,
+    refetch,
+    locations,
 }: {
-    content: { title: string; text: string; text2?: string; image?: string };
+    content: {
+        title: string;
+        text: string;
+        text2?: string;
+        image?: string;
+        id?: string;
+        location?: {};
+    };
     names?: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
-    typeCard?: 'user' | 'location';
+    typeCard?: 'user' | 'location' | 'addUser' | 'addAwards' | 'news';
     actions?: boolean;
     list?: boolean;
     confirmButton?: { confirmFn: () => void; rejectFn: () => void };
+    refetch?: any;
+    locations?: TreqLocation;
 }) => {
+    const adminToken = useAppSelector(state => state.adminState.token);
+
     return (
         <Card
             sx={{
@@ -76,12 +96,62 @@ export default ({
                 </CardContent>
             </CardActionArea>
             {actions && names ? (
-                <CardActions style={{ width: list ? '50vw' : '', paddingRight: '1.5em' }}>
+                <CardActions
+                    style={{
+                        width: list ? '50vw' : '',
+                        paddingRight: '1.5em',
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
                     <SelectChip names={names} initChip={initChip} typeCard={typeCard} list={list} />
+                    {typeCard == 'user' && (
+                        <SelectChipLocUser
+                            content={content}
+                            locations={locations}
+                            list
+                        ></SelectChipLocUser>
+                    )}
                 </CardActions>
             ) : (
                 ''
             )}
+            <div
+                style={{
+                    flex: '1 1',
+                }}
+            ></div>
+            {typeCard == 'addUser' && (
+                <SelectChipLocUser content={content} locations={locations}></SelectChipLocUser>
+            )}
+            {typeCard != 'addUser' && (
+                <Button
+                    onClick={() => {
+                        if (typeCard == 'location') {
+                            console.log(names);
+                            deleteLocations(adminToken, content.id, refetch);
+                        }
+                        if (typeCard == 'user') {
+                            console.log(names);
+                            deleteUser(adminToken, content.id, refetch);
+                        }
+                        if (typeCard == 'addAwards') {
+                            console.log(names);
+                            deleteAward(adminToken, content.id, refetch);
+                        }
+                        if (typeCard == 'news') {
+                            console.log(names);
+                            deleteNews(adminToken, content.id, refetch);
+                        }
+                    }}
+                    sx={{ margin: '1em', minWidth: '10em' }}
+                    variant="outlined"
+                    color="error"
+                >
+                    Удалить
+                </Button>
+            )}
+
             {confirmButton ? <Butons confirmButton={confirmButton} /> : ''}
         </Card>
     );
@@ -113,7 +183,7 @@ function SelectChip({
 }: {
     names: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
-    typeCard?: 'user' | 'location';
+    typeCard?: 'user' | 'location' | 'addUser' | 'addAwards' | 'news';
     list?: boolean;
 }) {
     const theme = useTheme();
@@ -176,6 +246,75 @@ function SelectChip({
                             style={getStyles(name.title, personName, theme)}
                         >
                             {name.title}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
+    );
+}
+function SelectChipLocUser({
+    initChip,
+    locations,
+    content,
+    list,
+}: {
+    locations?: TreqLocation;
+    initChip?: Array<string>;
+    content: { title: string; text: string; text2?: string; image?: string; id?: string };
+    list?: boolean;
+}) {
+    console.log(content);
+    const theme = useTheme();
+    const dispatch = useAppDispatch();
+    const adminToken = useAppSelector(state => state.adminState.token);
+    const [personName, setPersonName] = React.useState<string[]>([content?.location?.name] || []);
+
+    const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+        const {
+            target: { value },
+        } = event;
+
+        const loc = locations?.find(el => el.address == value);
+        setLocationUser(adminToken, content.id, loc.id);
+        setPersonName(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
+        );
+    };
+
+    return (
+        <div>
+            <FormControl sx={{ m: 1, width: list ? '40vw' : 'calc(19vw - 2em)' }}>
+                <InputLabel id="demo-multiple-chip-label">Награды</InputLabel>
+                <Select
+                    labelId="demo-multiple-chip-label"
+                    id="demo-multiple-chip"
+                    value={personName}
+                    onChange={handleChange}
+                    input={
+                        <OutlinedInput
+                            id="select-multiple-chip"
+                            placeholder="Награды"
+                            label="Награды"
+                        />
+                    }
+                    renderValue={selected => (
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                            {selected.map(value => (
+                                <Chip key={value} label={value} />
+                            ))}
+                        </Box>
+                    )}
+                    MenuProps={MenuProps}
+                >
+                    {locations?.map(location => (
+                        <MenuItem
+                            key={location.id}
+                            value={location.address}
+                            style={getStyles(location.title, personName, theme)}
+                        >
+                            {location.address}
                         </MenuItem>
                     ))}
                 </Select>

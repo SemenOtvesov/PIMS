@@ -50,6 +50,8 @@ function IsolateCarlList() {
     const adminToken = useAppSelector(state => state.adminState.token);
     const { data: userData } = adminApi.useGetUsersQuery(adminToken) || [];
     const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
+    const { data: locationsData, refetch: locationsRefetch } =
+        adminApi.useGetLocationQuery(adminToken) || [];
 
     const { Container, Item, ItemTitle, CardList } = style();
 
@@ -75,7 +77,12 @@ function IsolateCarlList() {
                 <Card
                     actions
                     key={i}
-                    content={{ title: el.firstName + ' ' + el.lastName, text: el.phone }}
+                    content={{
+                        title: el.firstName + ' ' + el.lastName,
+                        text: el.phone,
+                        id: el.id,
+                        location: el.location,
+                    }}
                     names={awardsData?.content.map(n => ({
                         title: n.name,
                         id: n.id,
@@ -84,6 +91,7 @@ function IsolateCarlList() {
                     typeCard="user"
                     list
                     initChip={el.employeeAwards?.map(el => el.awardTitle)}
+                    locations={locationsData?.content}
                 />
             ))}
         </CardList>

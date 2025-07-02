@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './style';
 import { Box, Divider, Stack, TextField, Typography } from '@mui/material';
 import Card from '@js/components/middleComponents/card';
@@ -11,6 +11,7 @@ import { Control, SubmitHandler, useForm, useFormState } from 'react-hook-form';
 import addLocations from '@js/api/admin/addLocations';
 import useAppSelector from '@js/hooks/useAppSelector';
 import { adminApi } from '@js/api/admin/indexQuery';
+import { setSearchLocation } from '@js/state/inputs/inputsState';
 
 type Tprops = {};
 
@@ -32,30 +33,77 @@ export default ({}: Tprops) => {
                 <CreateForm refetch={refetch} />
                 <Divider />
                 <Typography>Список существующих</Typography>
+                <IsolateInput />
                 <CardList>
                     {locationData?.content.length == 0 && <>Пока что пусто</>}
-                    {locationData?.content.map((el, i) => (
-                        <Card
-                            key={el.name + i}
-                            actions
-                            content={{
-                                title: el.name,
-                                text: el.address,
-                                image: 'data:image/jpeg;base64,' + el.locationImage,
-                            }}
-                            names={awardsData?.content.map(n => ({
-                                title: n.name,
-                                id: n.id,
-                                targetId: el.id,
-                            }))}
-                            initChip={el.locationAwards?.map(el => el.awardTitle)}
-                        />
-                    ))}
+                    <IsolateCarlList />
                 </CardList>
             </Item>
         </Container>
     );
 };
+
+function IsolateInput() {
+    const dispatch = useAppDispatch();
+    const state = useAppSelector(state => state.inputsState.searchLocation);
+    return (
+        <TextField
+            style={{ width: '40vw', margin: '0' }}
+            label="Название"
+            id="outlined-size-small"
+            size="small"
+            value={state}
+            onChange={e => dispatch(setSearchLocation(e.target.value))}
+        />
+    );
+}
+
+function IsolateCarlList() {
+    const adminToken = useAppSelector(state => state.adminState.token);
+    const { data: userData } = adminApi.useGetUsersQuery(adminToken) || [];
+    const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
+    const { data: locationData, refetch: locationsRefetch } =
+        adminApi.useGetLocationQuery(adminToken) || [];
+
+    const { Container, Item, ItemTitle, CardList } = style();
+
+    const searchUser = useAppSelector(state => state.inputsState.searchLocation);
+
+    const [search, setSearch] = useState(locationData?.content || []);
+    useEffect(() => {
+        setSearch(locationData?.content || []);
+    }, [userData]);
+
+    useEffect(() => {
+        setSearch(p => {
+            const serchList = locationData?.content || [];
+            return serchList.filter(el => el.name.toLowerCase().includes(searchUser.toLowerCase()));
+        });
+    }, [searchUser]);
+
+    console.log(search);
+
+    return search?.map((el, i) => (
+        <Card
+            key={el.name + i}
+            actions
+            content={{
+                title: el.name,
+                text: el.address,
+                image: 'data:image/jpeg;base64,' + el.locationImage,
+                id: el.id,
+            }}
+            names={awardsData?.content.map(n => ({
+                title: n.name,
+                id: n.id,
+                targetId: el.id,
+            }))}
+            initChip={el.locationAwards?.map(el => el.awardTitle)}
+            typeCard="location"
+            refetch={locationsRefetch}
+        />
+    ));
+}
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',

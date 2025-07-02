@@ -44,7 +44,11 @@ export default ({}: Tprops) => {
                                 text: el.content,
                                 text2: el.creator,
                                 image: 'data:image/jpeg;base64,' + (el.images ? el.images[0] : ''),
+
+                                id: el.id,
                             }}
+                            typeCard="news"
+                            refetch={refetch}
                         />
                     ))}
                 </CardList>

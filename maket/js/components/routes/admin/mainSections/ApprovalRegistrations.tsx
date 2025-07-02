@@ -16,6 +16,8 @@ export default ({}: Tprops) => {
 
     const adminToken = useAppSelector(state => state.adminState.token);
     const { data, refetch } = adminApi.useGetPendingApprovalsQuery(adminToken) || [];
+    const { data: locationsData, refetch: locationsRefetch } =
+        adminApi.useGetLocationQuery(adminToken) || [];
 
     return (
         <Container>
@@ -39,7 +41,11 @@ export default ({}: Tprops) => {
                                 title: el.firstName + ' ' + el.lastName,
                                 text: el.phone,
                                 image: `https://t.me/i/userpic/160/${el.telegramId}.jpg`,
+                                id: el.id,
+                                location: el.location,
                             }}
+                            typeCard="addUser"
+                            locations={locationsData?.content}
                         />
                     ))}
                 </CardList>

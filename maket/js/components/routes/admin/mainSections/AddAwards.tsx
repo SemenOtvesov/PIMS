@@ -41,7 +41,10 @@ export default ({}: Tprops) => {
                                 title: el.name,
                                 text: el.description,
                                 image: 'data:image/jpeg;base64,' + el.awardImage,
+                                id: el.id,
                             }}
+                            typeCard="addAwards"
+                            refetch={refetch}
                         />
                     ))}
                 </CardList>
@@ -102,21 +105,6 @@ function CreateForm({ refetch }: { refetch: any }) {
                     size="small"
                     {...register('description', { required: true })}
                 />
-                {/* <Button
-                    style={{ width: '40vw' }}
-                    component="label"
-                    role={undefined}
-                    variant="contained"
-                    tabIndex={-1}
-                    startIcon={<CloudUploadIcon />}
-                >
-                    Добавить фото
-                    <VisuallyHiddenInput
-                        type="file"
-                        {...register('photo', { required: true })}
-                        multiple
-                    />
-                </Button> */}
                 <IsoleteBtn control={control} />
             </FromWrapper>
         </Box>
