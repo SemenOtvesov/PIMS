@@ -48,7 +48,7 @@ function IsolateInput() {
 
 function IsolateCarlList() {
     const adminToken = useAppSelector(state => state.adminState.token);
-    const { data: userData } = adminApi.useGetUsersQuery(adminToken) || [];
+    const { data: userData, refetch: usersRefetch } = adminApi.useGetUsersQuery(adminToken) || [];
     const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
     const { data: locationsData, refetch: locationsRefetch } =
         adminApi.useGetLocationQuery(adminToken) || [];
@@ -92,6 +92,7 @@ function IsolateCarlList() {
                     list
                     initChip={el.employeeAwards?.map(el => el.awardTitle)}
                     locations={locationsData?.content}
+                    refetch={usersRefetch}
                 />
             ))}
         </CardList>

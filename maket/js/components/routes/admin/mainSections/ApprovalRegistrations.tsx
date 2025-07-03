@@ -15,6 +15,7 @@ export default ({}: Tprops) => {
     const { Container, Item, ItemTitle, CardList } = style();
 
     const adminToken = useAppSelector(state => state.adminState.token);
+    const { data: dataUsers, refetch: usersRefetch } = adminApi.useGetUsersQuery(adminToken) || [];
     const { data, refetch } = adminApi.useGetPendingApprovalsQuery(adminToken) || [];
     const { data: locationsData, refetch: locationsRefetch } =
         adminApi.useGetLocationQuery(adminToken) || [];
@@ -46,6 +47,7 @@ export default ({}: Tprops) => {
                             }}
                             typeCard="addUser"
                             locations={locationsData?.content}
+                            refetch={usersRefetch}
                         />
                     ))}
                 </CardList>

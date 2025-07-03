@@ -286,7 +286,7 @@ function SelectChipLocUser({
     return (
         <div>
             <FormControl sx={{ m: 1, width: list ? '40vw' : 'calc(19vw - 2em)' }}>
-                <InputLabel id="demo-multiple-chip-label">Награды</InputLabel>
+                <InputLabel id="demo-multiple-chip-label">Локация</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"
