@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import style from './style';
 
-// @ts-ignore: Unreachable code error
-import IconCoin from '@maket/img/icon/coin.svg';
 import useAppSelector from '@js/hooks/useAppSelector';
-import { AnimatePresence } from 'framer-motion';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 
 const header = () => {
@@ -17,11 +14,8 @@ const header = () => {
         BalanceBox,
         BalanceText,
         BalanceValue,
-        BalanceIcon,
+
         BalanceIconBox,
-        Lang,
-        LangPopap,
-        LangPopapItem,
     } = style();
 
     const user = useAppSelector(state => state.userState.user);

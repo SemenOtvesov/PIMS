@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import style from './style';
 
 import { TlocationUser } from '@js/types/state/location';
+import { TuserUser } from '@js/types/state/users';
 
-type Tprops = { item: TlocationUser; itemNum: number };
+type Tprops = { item: TlocationUser; itemNum: number; user: TuserUser | undefined };
 
-export default ({ item, itemNum }: Tprops) => {
+export default ({ item, itemNum, user }: Tprops) => {
     const { Container, TextBox, Title, Text, MainContent, TitleNum } = style();
 
     useEffect(() => {
@@ -13,7 +14,7 @@ export default ({ item, itemNum }: Tprops) => {
     });
     return (
         <Container data-raiting-item>
-            <TextBox data-raiting-item>
+            <TextBox data-raiting-item className={item.id == user.location.id ? 'active' : ''}>
                 <Title>
                     <TitleNum>
                         {itemNum}.{'  '}

@@ -15,6 +15,9 @@ export default () => {
             flex: '1 1',
             gap: '4px',
             padding: '10px 20px 8px',
+            '&.active': {
+                backgroundColor: '#FFE3A6',
+            },
         }),
         TitleNum: styled.span({
             fontSize: '20px',

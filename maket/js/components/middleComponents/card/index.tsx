@@ -275,7 +275,7 @@ function SelectChipLocUser({
             target: { value },
         } = event;
 
-        const loc = locations?.find(el => el.address == value);
+        const loc = locations?.find(el => el.name == value);
         setLocationUser(adminToken, content.id, loc.id);
         setPersonName(
             // On autofill we get a stringified value.
@@ -311,10 +311,10 @@ function SelectChipLocUser({
                     {locations?.map(location => (
                         <MenuItem
                             key={location.id}
-                            value={location.address}
+                            value={location.name}
                             style={getStyles(location.title, personName, theme)}
                         >
-                            {location.address}
+                            {location.name}
                         </MenuItem>
                     ))}
                 </Select>

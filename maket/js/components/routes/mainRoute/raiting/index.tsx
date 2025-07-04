@@ -12,6 +12,9 @@ import AbcoluteImg4 from '@maket/img/icon/absoluteImg/cat2.png';
 type Tprops = {};
 
 export default ({}: Tprops) => {
+    // @ts-ignore: Unreachable code error
+    const tg = window.Telegram.WebApp;
+
     const {
         Container,
         Title,
@@ -26,6 +29,11 @@ export default ({}: Tprops) => {
 
     const userToken = useAppSelector(state => state.userState.token);
     const newsList = userApi.useGetLocationQuery(userToken);
+    const user = userApi.useGetProfileQuery({
+        userToken,
+        // @ts-ignore: Unreachable code error
+        userUid: tg.initDataUnsafe.user.id,
+    });
 
     return (
         <Container className="allow-scroll">
@@ -55,7 +63,9 @@ export default ({}: Tprops) => {
             />
 
             <Main>
-                {newsList.data?.content.map((el, i) => <Item key={i} item={el} itemNum={i + 1} />)}
+                {newsList.data?.content.map((el, i) => (
+                    <Item key={i} item={el} user={user.data} itemNum={i + 1} />
+                ))}
                 <div
                     style={{
                         flex: '1 1',

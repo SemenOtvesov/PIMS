@@ -39,7 +39,8 @@ export default ({}: Tprops) => {
                                 },
                             }}
                             content={{
-                                title: el.firstName + ' ' + el.lastName,
+                                title:
+                                    el.firstName + ' ' + (el.middleName || '') + ' ' + el.lastName,
                                 text: el.phone,
                                 image: `https://t.me/i/userpic/160/${el.telegramId}.jpg`,
                                 id: el.id,
