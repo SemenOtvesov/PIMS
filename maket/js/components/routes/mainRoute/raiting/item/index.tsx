@@ -14,7 +14,7 @@ export default ({ item, itemNum, user }: Tprops) => {
     });
     return (
         <Container data-raiting-item>
-            <TextBox data-raiting-item className={item.id == user.location.id ? 'active' : ''}>
+            <TextBox data-raiting-item className={item.id == user?.location?.id ? 'active' : ''}>
                 <Title>
                     <TitleNum>
                         {itemNum}.{'  '}

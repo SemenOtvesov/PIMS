@@ -264,7 +264,6 @@ function SelectChipLocUser({
     content: { title: string; text: string; text2?: string; image?: string; id?: string };
     list?: boolean;
 }) {
-    console.log(content);
     const theme = useTheme();
     const dispatch = useAppDispatch();
     const adminToken = useAppSelector(state => state.adminState.token);

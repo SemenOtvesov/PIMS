@@ -7,6 +7,7 @@ export type TUser = {
     phone: string;
     username: string;
     firstName: string;
+    middleName: string;
     lastName: string;
     photoUrl: string;
     awards: Array<Taward>;

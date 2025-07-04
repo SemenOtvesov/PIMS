@@ -19,6 +19,7 @@ import useAppSelector from '@js/hooks/useAppSelector';
 import LogoutBtn from './logoutBtn';
 
 import FormAuth from './formAuth';
+import useAppDispatch from '@js/hooks/useAppDispatch';
 
 const drawerWidth = 240;
 
@@ -38,8 +39,15 @@ const drawerElLink: [
 ] = ['AssignRewardLocations', 'AssignRewardUsers', 'AddAwards', 'News', 'ApprovalRegistrations'];
 
 export default function ClippedDrawer() {
-    const [activeSection, setactiveSection] =
-        React.useState<TactiveSection>('AssignRewardLocations');
+    const dispatch = useAppDispatch();
+    const page = localStorage.getItem('pathAdmin');
+    const [activeSection, setactiveSection] = React.useState<TactiveSection>(
+        page || 'AssignRewardLocations',
+    );
+
+    React.useEffect(() => {
+        localStorage.setItem('pathAdmin', activeSection);
+    }, [activeSection]);
 
     const adminToken = useAppSelector(state => state.adminState.token);
 
