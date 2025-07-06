@@ -7,25 +7,16 @@ export default async (
     adminToken: string,
     awardId: string,
     targetId: string,
-    locationAwards: Array<{}>,
 ) => {
-    const res = await axios.post(
-        baseUrl + '/api/admin/assign-user-award',
-        {
+    const res = await axios.delete(baseUrl + `/api/admin/delete/employeeAward/{awardId}`, {
+        params: {
             awardId,
             targetId,
         },
-        {
-            headers: {
-                Authorization: `Bearer ${adminToken}`,
-            },
+        headers: {
+            Authorization: `Bearer ${adminToken}`,
         },
-    );
-    if (locationAwards) {
-        locationAwards.push(res.data);
-    } else {
-        locationAwards = [res.data];
-    }
+    });
 
     // dispatch(setAdminNewsList(res.data.token));
     // return res.data;

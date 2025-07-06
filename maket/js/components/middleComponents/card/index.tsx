@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -30,6 +30,8 @@ import deleteAward from '@js/api/admin/delete/deleteAward';
 import deleteNews from '@js/api/admin/delete/deleteNews';
 import { TreqLocation } from '@js/types/state/location';
 import setLocationUser from '@js/api/admin/setLocationUser';
+import deleteLocationAward from '@js/api/admin/deleteLocationAward';
+import deleteUserAward from '@js/api/admin/deleteUserAward';
 
 export default ({
     content,
@@ -49,6 +51,7 @@ export default ({
         image?: string;
         id?: string;
         location?: {};
+        locationAwards?: [];
     };
     names?: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
@@ -104,7 +107,13 @@ export default ({
                         flexDirection: 'column',
                     }}
                 >
-                    <SelectChip names={names} initChip={initChip} typeCard={typeCard} list={list} />
+                    <SelectChip
+                        names={names}
+                        initChip={initChip}
+                        typeCard={typeCard}
+                        list={list}
+                        locationAwards={content?.locationAwards}
+                    />
                     {typeCard == 'user' && (
                         <SelectChipLocUser
                             content={content}
@@ -128,19 +137,15 @@ export default ({
                 <Button
                     onClick={() => {
                         if (typeCard == 'location') {
-                            console.log(names);
                             deleteLocations(adminToken, content.id, refetch);
                         }
                         if (typeCard == 'user') {
-                            console.log(names);
                             deleteUser(adminToken, content.id, refetch);
                         }
                         if (typeCard == 'addAwards') {
-                            console.log(names);
                             deleteAward(adminToken, content.id, refetch);
                         }
                         if (typeCard == 'news') {
-                            console.log(names);
                             deleteNews(adminToken, content.id, refetch);
                         }
                     }}
@@ -175,16 +180,19 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
     };
 }
 
+let lastValue = [];
 function SelectChip({
     names,
     initChip,
     typeCard,
     list,
+    locationAwards,
 }: {
     names: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
     typeCard?: 'user' | 'location' | 'addUser' | 'addAwards' | 'news';
     list?: boolean;
+    locationAwards?: Array<{}>;
 }) {
     const theme = useTheme();
     const dispatch = useAppDispatch();
@@ -199,11 +207,30 @@ function SelectChip({
         const award = names.find(el => el.title == value[value.length - 1]);
         const awardId = award?.id;
         const targetId = award?.targetId;
-        if (awardId && targetId) {
-            if (typeCard == 'user') {
-                adduserAward(dispatch, adminToken, awardId, targetId);
+
+        console.log(awardId, targetId);
+
+        if (typeCard == 'user') {
+            if (lastValue.length >= value.length) {
+                const deleteEl = lastValue.find(el => !value.includes(el));
+                const delAw = locationAwards?.find(el => el.awardTitle == deleteEl);
+                const delAwId = delAw?.id;
+                if (delAwId) {
+                    deleteUserAward(dispatch, adminToken, delAwId, targetId);
+                }
             } else {
-                addLocationAward(dispatch, adminToken, awardId, targetId);
+                adduserAward(dispatch, adminToken, awardId, targetId, locationAwards);
+            }
+        } else {
+            if (lastValue.length >= value.length) {
+                const deleteEl = lastValue.find(el => !value.includes(el));
+                const delAw = locationAwards?.find(el => el.awardTitle == deleteEl);
+                const delAwId = delAw?.id;
+                if (delAwId) {
+                    deleteLocationAward(dispatch, adminToken, delAwId, targetId);
+                }
+            } else {
+                addLocationAward(dispatch, adminToken, awardId, targetId, locationAwards);
             }
         }
 
@@ -212,6 +239,10 @@ function SelectChip({
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+    useEffect(() => {
+        lastValue = personName;
+    }, [personName]);
 
     return (
         <div>
@@ -230,13 +261,15 @@ function SelectChip({
                             label="Награды"
                         />
                     }
-                    renderValue={selected => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                            {selected.map(value => (
-                                <Chip key={value} label={value} />
-                            ))}
-                        </Box>
-                    )}
+                    renderValue={selected => {
+                        return (
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                {selected.map(value => (
+                                    <Chip key={value} label={value} />
+                                ))}
+                            </Box>
+                        );
+                    }}
                     MenuProps={MenuProps}
                 >
                     {names.map(name => (
@@ -278,7 +311,7 @@ function SelectChipLocUser({
         setLocationUser(adminToken, content.id, loc.id);
         setPersonName(
             // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
+            typeof value === 'string' ? [value] : value,
         );
     };
 
@@ -298,13 +331,16 @@ function SelectChipLocUser({
                             label="Награды"
                         />
                     }
-                    renderValue={selected => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                            {selected.map(value => (
-                                <Chip key={value} label={value} />
-                            ))}
-                        </Box>
-                    )}
+                    renderValue={selected => {
+                        console.log(selected);
+                        return (
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                {selected.map(value => (
+                                    <Chip key={value} label={value} />
+                                ))}
+                            </Box>
+                        );
+                    }}
                     MenuProps={MenuProps}
                 >
                     {locations?.map(location => (

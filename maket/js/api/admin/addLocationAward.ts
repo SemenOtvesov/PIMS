@@ -7,6 +7,7 @@ export default async (
     adminToken: string,
     awardId: string,
     targetId: string,
+    locationAwards: Array<{}>,
 ) => {
     const res = await axios.post(
         baseUrl + '/api/admin/assign-location-award',
@@ -20,6 +21,11 @@ export default async (
             },
         },
     );
+    if (locationAwards) {
+        locationAwards.push(res.data);
+    } else {
+        locationAwards = [res.data];
+    }
 
     // dispatch(setAdminNewsList(res.data.token));
     // return res.data;

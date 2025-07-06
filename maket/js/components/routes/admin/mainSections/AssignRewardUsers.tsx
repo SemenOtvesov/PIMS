@@ -82,6 +82,7 @@ function IsolateCarlList() {
                         text: el.phone,
                         id: el.id,
                         location: el.location,
+                        locationAwards: el.locationAwards ? [...el.locationAwards] : [],
                     }}
                     names={awardsData?.content.map(n => ({
                         title: n.name,

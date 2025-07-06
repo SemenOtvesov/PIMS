@@ -92,6 +92,7 @@ function IsolateCarlList() {
                 text: el.address,
                 image: 'data:image/jpeg;base64,' + el.locationImage,
                 id: el.id,
+                locationAwards: el.locationAwards ? [...el.locationAwards] : [],
             }}
             names={awardsData?.content.map(n => ({
                 title: n.name,
