@@ -73,8 +73,8 @@ function IsolateCarlList() {
     return (
         <CardList style={{ flexDirection: 'column' }}>
             {userData?.content.length == 0 && <>Пока что пусто</>}
-            {search
-                .sort((a, b) => (a.awards?.length > b.awards?.length ? 1 : -1))
+            {[...search]
+                ?.sort((a, b) => (new Date(a.approvalDate) > new Date(b.approvalDate) ? 1 : -1))
                 .map((el, i) => (
                     <Card
                         actions

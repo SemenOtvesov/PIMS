@@ -85,7 +85,7 @@ function IsolateCarlList() {
         });
     }, [searchUser]);
 
-    return search
+    return [...search]
         ?.sort((a, b) => (a.awards?.length > b.awards?.length ? 1 : -1))
         .map((el, i) => (
             <Card
