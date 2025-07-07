@@ -69,7 +69,11 @@ function IsolateCarlList() {
 
     const searchUser = useAppSelector(state => state.inputsState.searchLocation);
 
-    const [search, setSearch] = useState(locationData?.content || []);
+    const [search, setSearch] = useState(
+        [...(locationData?.content || [])].sort((a, b) =>
+            a.awards?.length > b.awards?.length ? 1 : -1,
+        ) || [],
+    );
     useEffect(() => {
         setSearch(locationData?.content || []);
     }, [userData]);
@@ -81,29 +85,29 @@ function IsolateCarlList() {
         });
     }, [searchUser]);
 
-    console.log(search);
-
-    return search?.map((el, i) => (
-        <Card
-            key={el.name + i}
-            actions
-            content={{
-                title: el.name,
-                text: el.address,
-                image: 'data:image/jpeg;base64,' + el.locationImage,
-                id: el.id,
-                locationAwards: el.locationAwards ? [...el.locationAwards] : [],
-            }}
-            names={awardsData?.content.map(n => ({
-                title: n.name,
-                id: n.id,
-                targetId: el.id,
-            }))}
-            initChip={el.locationAwards?.map(el => el.awardTitle)}
-            typeCard="location"
-            refetch={locationsRefetch}
-        />
-    ));
+    return search
+        ?.sort((a, b) => (a.awards?.length > b.awards?.length ? 1 : -1))
+        .map((el, i) => (
+            <Card
+                key={el.name + i}
+                actions
+                content={{
+                    title: el.name,
+                    text: el.address,
+                    image: 'data:image/jpeg;base64,' + el.locationImage,
+                    id: el.id,
+                    locationAwards: el.locationAwards ? [...el.locationAwards] : [],
+                }}
+                names={awardsData?.content.map(n => ({
+                    title: n.name,
+                    id: n.id,
+                    targetId: el.id,
+                }))}
+                initChip={el.locationAwards?.map(el => el.awardTitle)}
+                typeCard="location"
+                refetch={locationsRefetch}
+            />
+        ));
 }
 
 const VisuallyHiddenInput = styled('input')({

@@ -28,7 +28,7 @@ import addLocations from '@js/api/admin/addLocations';
 import deleteUser from '@js/api/admin/delete/deleteUser';
 import deleteAward from '@js/api/admin/delete/deleteAward';
 import deleteNews from '@js/api/admin/delete/deleteNews';
-import { TreqLocation } from '@js/types/state/location';
+import { Tlocation, TreqLocation } from '@js/types/state/location';
 import setLocationUser from '@js/api/admin/setLocationUser';
 import deleteLocationAward from '@js/api/admin/deleteLocationAward';
 import deleteUserAward from '@js/api/admin/deleteUserAward';
@@ -43,6 +43,7 @@ export default ({
     list,
     refetch,
     locations,
+    setSearch,
 }: {
     content: {
         title: string;
@@ -53,6 +54,7 @@ export default ({
         location?: {};
         locationAwards?: [];
     };
+    setSearch?: React.Dispatch<React.SetStateAction<Tlocation[]>>;
     names?: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
     typeCard?: 'user' | 'location' | 'addUser' | 'addAwards' | 'news';
@@ -187,12 +189,14 @@ function SelectChip({
     typeCard,
     list,
     locationAwards,
+    setSearch,
 }: {
     names: Array<{ title: string; id: string; targetId: string }>;
     initChip?: Array<string>;
     typeCard?: 'user' | 'location' | 'addUser' | 'addAwards' | 'news';
     list?: boolean;
     locationAwards?: Array<{}>;
+    setSearch?: React.Dispatch<React.SetStateAction<Tlocation[]>>;
 }) {
     const theme = useTheme();
     const dispatch = useAppDispatch();

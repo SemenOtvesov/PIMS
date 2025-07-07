@@ -73,29 +73,31 @@ function IsolateCarlList() {
     return (
         <CardList style={{ flexDirection: 'column' }}>
             {userData?.content.length == 0 && <>Пока что пусто</>}
-            {search.map((el, i) => (
-                <Card
-                    actions
-                    key={i}
-                    content={{
-                        title: el.firstName + ' ' + el.lastName,
-                        text: el.phone,
-                        id: el.id,
-                        location: el.location,
-                        locationAwards: el.locationAwards ? [...el.locationAwards] : [],
-                    }}
-                    names={awardsData?.content.map(n => ({
-                        title: n.name,
-                        id: n.id,
-                        targetId: el.id,
-                    }))}
-                    typeCard="user"
-                    list
-                    initChip={el.employeeAwards?.map(el => el.awardTitle)}
-                    locations={locationsData?.content}
-                    refetch={usersRefetch}
-                />
-            ))}
+            {search
+                .sort((a, b) => (a.awards?.length > b.awards?.length ? 1 : -1))
+                .map((el, i) => (
+                    <Card
+                        actions
+                        key={i}
+                        content={{
+                            title: el.firstName + ' ' + el.lastName,
+                            text: el.phone,
+                            id: el.id,
+                            location: el.location,
+                            locationAwards: el.locationAwards ? [...el.locationAwards] : [],
+                        }}
+                        names={awardsData?.content.map(n => ({
+                            title: n.name,
+                            id: n.id,
+                            targetId: el.id,
+                        }))}
+                        typeCard="user"
+                        list
+                        initChip={el.employeeAwards?.map(el => el.awardTitle)}
+                        locations={locationsData?.content}
+                        refetch={usersRefetch}
+                    />
+                ))}
         </CardList>
     );
 }

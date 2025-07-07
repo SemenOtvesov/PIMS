@@ -120,6 +120,7 @@ function CreateForm({ refetch }: { refetch: any }) {
                 <TextField
                     style={{ width: '40vw', margin: '0' }}
                     label="Описание"
+                    multiline
                     id="outlined-size-small"
                     size="small"
                     {...register('description', { required: true })}
