@@ -67,9 +67,10 @@ export default ({ item, full }: Tprops) => {
                     </>
                 )}
                 {full && (
-                    <MainContent style={{ fontSize: 16, fontWeight: 700 }}>
-                        {item.content}
-                    </MainContent>
+                    <MainContent
+                        dangerouslySetInnerHTML={{ __html: item.content.split('\n').join('<br/>') }}
+                        style={{ fontSize: 16, fontWeight: 700 }}
+                    ></MainContent>
                 )}
             </TextBox>
         </Container>

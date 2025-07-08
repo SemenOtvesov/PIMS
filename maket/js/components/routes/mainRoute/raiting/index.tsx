@@ -63,9 +63,13 @@ export default ({}: Tprops) => {
             />
 
             <Main>
-                {newsList.data?.content.map((el, i) => (
-                    <Item key={i} item={el} user={user.data} itemNum={i + 1} />
-                ))}
+                {(newsList.data?.content ? [...newsList.data?.content] : [])
+                    .sort((a, b) =>
+                        a?.locationAwards?.length > b?.locationAwards?.length ? -1 : 1,
+                    )
+                    .map((el, i) => (
+                        <Item key={i} item={el} user={user.data} itemNum={i + 1} />
+                    ))}
                 <div
                     style={{
                         flex: '1 1',
