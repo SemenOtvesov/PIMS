@@ -36,21 +36,26 @@ export default ({}: Tprops) => {
                 <Typography variant="h5">Уже существующие новости</Typography>
                 <CardList>
                     {data?.content.length == 0 && <>Пока что пусто</>}
-                    {data?.content.map(el => (
-                        <Card
-                            key={el.id}
-                            content={{
-                                title: el.title,
-                                text: el.content,
-                                text2: el.creator,
-                                image: 'data:image/jpeg;base64,' + (el.images ? el.images[0] : ''),
+                    {(data?.content ? [...data?.content] : [])
+                        .sort((a, b) =>
+                            new Date(a?.publishDate) > new Date(b?.publishDate) ? -1 : 1,
+                        )
+                        .map(el => (
+                            <Card
+                                key={el.id}
+                                content={{
+                                    title: el.title,
+                                    text: el.content,
+                                    text2: el.creator,
+                                    image:
+                                        'data:image/jpeg;base64,' + (el.images ? el.images[0] : ''),
 
-                                id: el.id,
-                            }}
-                            typeCard="news"
-                            refetch={refetch}
-                        />
-                    ))}
+                                    id: el.id,
+                                }}
+                                typeCard="news"
+                                refetch={refetch}
+                            />
+                        ))}
                 </CardList>
             </Item>
         </Container>

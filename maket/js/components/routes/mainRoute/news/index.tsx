@@ -64,7 +64,11 @@ export default ({}: Tprops) => {
                 {activeNews ? (
                     <Item item={activeNews} full />
                 ) : (
-                    newsList.data?.content.map((el, i) => <Item key={i} item={el} />)
+                    (newsList.data?.content ? [...newsList.data?.content] : [])
+                        .sort((a, b) =>
+                            new Date(a?.publishDate) > new Date(b?.publishDate) ? -1 : 1,
+                        )
+                        .map((el, i) => <Item key={i} item={el} />)
                 )}
             </Main>
         </Container>
