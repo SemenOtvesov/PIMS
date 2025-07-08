@@ -77,7 +77,7 @@ export default ({}: Tprops) => {
             <UserName>
                 {tg.initDataUnsafe.user.first_name} {tg.initDataUnsafe.user.last_name}
             </UserName>
-            <Phone>{user?.data?.phone || 'Не указан'}</Phone>
+            <Phone>{user?.data?.phone ? formatPhoneNumber(user.data.phone) : 'Не указан'}</Phone>
             <div
                 style={{
                     position: 'relative',
@@ -116,3 +116,20 @@ export default ({}: Tprops) => {
         </Container>
     );
 };
+
+function formatPhoneNumber(phoneNumber) {
+    // Преобразуем число в строку
+    const str = phoneNumber.toString();
+
+    // Проверяем, что номер начинается с 7 и имеет 11 цифр
+    if (str.length === 11 && str[0] === '7') {
+        // Форматируем номер согласно шаблону +7999 999 99 99
+        return `+${str[0]}${str.substring(1, 4)} ${str.substring(4, 7)} ${str.substring(
+            7,
+            9,
+        )} ${str.substring(9)}`;
+    }
+
+    // Возвращаем исходное значение, если формат не соответствует ожидаемому
+    return phoneNumber;
+}
