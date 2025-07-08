@@ -208,11 +208,13 @@ function SelectChip({
             target: { value },
         } = event;
 
-        const award = names.find(el => el.title == value[value.length - 1]);
+        let award = names.find(el => el.title == value[value.length - 1]);
+        if (value.length == 0) {
+            award = names.find(el => el.title == lastValue[lastValue.length - 1]);
+        }
+
         const awardId = award?.id;
         const targetId = award?.targetId;
-
-        console.log(awardId, targetId);
 
         if (typeCard == 'user') {
             if (lastValue.length >= value.length) {
@@ -230,6 +232,7 @@ function SelectChip({
                 const deleteEl = lastValue.find(el => !value.includes(el));
                 const delAw = locationAwards?.find(el => el.awardTitle == deleteEl);
                 const delAwId = delAw?.id;
+
                 if (delAwId) {
                     deleteLocationAward(dispatch, adminToken, delAwId, targetId);
                 }

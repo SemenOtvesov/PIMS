@@ -41,6 +41,8 @@ export default ({}: Tprops) => {
         userUid: tg.initDataUnsafe.user.id,
     });
 
+    console.log(user);
+
     return (
         <Container className="allow-scroll">
             <BackCircle>
@@ -75,7 +77,7 @@ export default ({}: Tprops) => {
             <UserName>
                 {tg.initDataUnsafe.user.first_name} {tg.initDataUnsafe.user.last_name}
             </UserName>
-            <Phone>+7999 999 99 99</Phone>
+            <Phone>{user?.data?.phone || 'Не указан'}</Phone>
             <div
                 style={{
                     position: 'relative',
