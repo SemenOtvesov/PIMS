@@ -80,7 +80,7 @@ function IsolateCarlList() {
                         actions
                         key={i}
                         content={{
-                            title: el.firstName + ' ' + el.lastName,
+                            title: el.firstName + ' ' + (el.middleName || '') + ' ' + el.lastName,
                             text: el.phone,
                             id: el.id,
                             location: el.location,

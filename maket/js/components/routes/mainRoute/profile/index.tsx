@@ -75,7 +75,7 @@ export default ({}: Tprops) => {
                 />
             </AvatarBox>
             <UserName>
-                {tg.initDataUnsafe.user.first_name} {tg.initDataUnsafe.user.last_name}
+                {user?.data?.firstName} {user?.data?.lastName}
             </UserName>
             <Phone>{user?.data?.phone ? formatPhoneNumber(user.data.phone) : 'Не указан'}</Phone>
             <div
