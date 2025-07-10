@@ -75,7 +75,7 @@ export default ({}: Tprops) => {
                 />
             </AvatarBox>
             <UserName>
-                {user?.data?.firstName} {user?.data?.lastName}
+                {user?.data?.firstName} {user?.data?.middleName} {user?.data?.lastName}
             </UserName>
             <Phone>{user?.data?.phone ? formatPhoneNumber(user.data.phone) : 'Не указан'}</Phone>
             <div
