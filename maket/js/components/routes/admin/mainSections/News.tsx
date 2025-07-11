@@ -16,6 +16,7 @@ import useAppDispatch from '@js/hooks/useAppDispatch';
 import { Control, SubmitHandler, useForm, useFormState } from 'react-hook-form';
 import addNews from '@js/api/admin/addNews';
 import { adminApi } from '@js/api/admin/indexQuery';
+import useLogoutAdmin from '@js/hooks/admin/useLogoutAdmin';
 
 type Tprops = {};
 
@@ -24,6 +25,19 @@ export default ({}: Tprops) => {
 
     const adminToken = useAppSelector(state => state.adminState.token);
     const { data, refetch } = adminApi.useGetNewsQuery(adminToken) || [];
+
+    const {
+        data: userData,
+        refetch: usersRefetch,
+        error,
+    } = adminApi.useGetUsersQuery(adminToken) || [];
+
+    const logout = useLogoutAdmin();
+    useEffect(() => {
+        if (error?.status == 403) {
+            logout();
+        }
+    }, [error]);
 
     return (
         <Container>

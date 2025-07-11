@@ -12,6 +12,7 @@ import addLocations from '@js/api/admin/addLocations';
 import useAppSelector from '@js/hooks/useAppSelector';
 import { adminApi } from '@js/api/admin/indexQuery';
 import { setSearchUser } from '@js/state/inputs/inputsState';
+import useLogoutAdmin from '@js/hooks/admin/useLogoutAdmin';
 
 type Tprops = {};
 
@@ -48,10 +49,21 @@ function IsolateInput() {
 
 function IsolateCarlList() {
     const adminToken = useAppSelector(state => state.adminState.token);
-    const { data: userData, refetch: usersRefetch } = adminApi.useGetUsersQuery(adminToken) || [];
+    const {
+        data: userData,
+        refetch: usersRefetch,
+        error,
+    } = adminApi.useGetUsersQuery(adminToken) || [];
     const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
     const { data: locationsData, refetch: locationsRefetch } =
         adminApi.useGetLocationQuery(adminToken) || [];
+
+    const logout = useLogoutAdmin();
+    useEffect(() => {
+        if (error?.status == 403) {
+            logout();
+        }
+    }, [error]);
 
     const { Container, Item, ItemTitle, CardList } = style();
 

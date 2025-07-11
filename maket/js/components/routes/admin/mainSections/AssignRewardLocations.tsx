@@ -12,6 +12,7 @@ import addLocations from '@js/api/admin/addLocations';
 import useAppSelector from '@js/hooks/useAppSelector';
 import { adminApi } from '@js/api/admin/indexQuery';
 import { setSearchLocation } from '@js/state/inputs/inputsState';
+import useLogoutAdmin from '@js/hooks/admin/useLogoutAdmin';
 
 type Tprops = {};
 
@@ -21,6 +22,19 @@ export default ({}: Tprops) => {
     const adminToken = useAppSelector(state => state.adminState.token);
     const { data: locationData, refetch } = adminApi.useGetLocationQuery(adminToken) || [];
     const { data: awardsData } = adminApi.useGetAwardsQuery(adminToken) || [];
+
+    const {
+        data: userData,
+        refetch: usersRefetch,
+        error,
+    } = adminApi.useGetUsersQuery(adminToken) || [];
+
+    const logout = useLogoutAdmin();
+    useEffect(() => {
+        if (error?.status == 403) {
+            logout();
+        }
+    }, [error]);
 
     return (
         <Container>

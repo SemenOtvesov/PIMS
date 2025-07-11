@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './style';
 import { Divider, Typography } from '@mui/material';
 import Card from '@js/components/middleComponents/card';
@@ -7,6 +7,7 @@ import { adminApi } from '@js/api/admin/indexQuery';
 import useAppDispatch from '@js/hooks/useAppDispatch';
 import aproveUser from '@js/api/admin/aproveUser';
 import declineUser from '@js/api/admin/declineUser';
+import useLogoutAdmin from '@js/hooks/admin/useLogoutAdmin';
 
 type Tprops = {};
 
@@ -15,10 +16,21 @@ export default ({}: Tprops) => {
     const { Container, Item, ItemTitle, CardList } = style();
 
     const adminToken = useAppSelector(state => state.adminState.token);
-    const { data: dataUsers, refetch: usersRefetch } = adminApi.useGetUsersQuery(adminToken) || [];
+    const {
+        data: dataUsers,
+        refetch: usersRefetch,
+        error,
+    } = adminApi.useGetUsersQuery(adminToken) || [];
     const { data, refetch } = adminApi.useGetPendingApprovalsQuery(adminToken) || [];
     const { data: locationsData, refetch: locationsRefetch } =
         adminApi.useGetLocationQuery(adminToken) || [];
+
+    const logout = useLogoutAdmin();
+    useEffect(() => {
+        if (error?.status == 403) {
+            logout();
+        }
+    }, [error]);
 
     return (
         <Container>
