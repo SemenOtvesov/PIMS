@@ -56,11 +56,6 @@ export default ({}: Tprops) => {
                 <Avatar
                     style={{ background: `url(${baseAvatar}) 100%/100%` }}
                     src={`https://t.me/i/userpic/160/${tg.initDataUnsafe.user.id}.jpg`}
-                    onLoad={(e: any) => {
-                        if (e.target.width < 10) {
-                            e.target.src = baseAvatar;
-                        }
-                    }}
                 />
 
                 <ImageAbsoluteDiv
