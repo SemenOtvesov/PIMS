@@ -66,13 +66,26 @@ export default ({ item, full }: Tprops) => {
                         </Text>
                     </>
                 )}
+                {/* {console.log(wrapUrlsInText(item.content.split('\n').join('<br/>')))} */}
                 {full && (
                     <MainContent
-                        dangerouslySetInnerHTML={{ __html: item.content.split('\n').join('<br/>') }}
+                        dangerouslySetInnerHTML={{
+                            __html: wrapUrlsInText(item.content.split('\n').join('<br/>')),
+                        }}
                         style={{ fontSize: 16, fontWeight: 700 }}
                     ></MainContent>
                 )}
             </TextBox>
         </Container>
     );
+};
+
+const wrapUrlsInText = text => {
+    // Регулярное выражение для поиска URL
+    const urlRegex = /(https?:\/\/[^\s<]+)/g; // Игнорируем URL внутри тегов
+
+    // Заменяем URL на <a> теги
+    return text.replace(urlRegex, url => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+    });
 };
